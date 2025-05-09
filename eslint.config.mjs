@@ -18,8 +18,9 @@ export default withNuxt()
       }],
       'vue/html-self-closing': ['warn', {
         html: {
-          normal: 'never',
-          void: 'always'
+          normal: 'any',
+          void: 'always',
+          component: 'always'
         }
       }]
     }
