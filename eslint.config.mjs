@@ -3,7 +3,7 @@ import withNuxt from './.nuxt/eslint.config.mjs'
 
 export default withNuxt()
   .prepend({
-    ignores: ['**/*.config.*']
+    ignores: ['**/*.config.*', 'generated/**']
   })
   .override('nuxt/vue/rules', {
     rules: {
