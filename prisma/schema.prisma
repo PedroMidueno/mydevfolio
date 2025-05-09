@@ -1,0 +1,28 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_DIRECT_URL")
+}
+
+model Page {
+  id                  Int       @id @default(autoincrement())
+  slug                String    @unique @db.VarChar(100)
+  userName            String    @map("user_name") @db.VarChar(200)
+  userJobPositionName String?   @map("user_job_position_name") @db.VarChar(150)
+  userDescription     String?   @map("user_description") @db.VarChar(1000)
+  userId              Int       @unique @map("user_id")
+  isPublished         Boolean   @default(false) @map("is_published")
+  userImageFileKey    String?   @map("user_image_file_key") @db.VarChar(200)
+  createdAt           DateTime  @default(now()) @map("created_at") @db.Timestamp(6)
+  publishDate         DateTime? @map("publish_date") @db.Timestamp(6)
+
+  @@index([slug])
+  @@map("page")
+}
