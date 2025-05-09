@@ -1,3 +1,9 @@
+<script setup lang="ts">
+definePageMeta({
+  layout: false
+})
+</script>
+
 <template>
-  <h1>DevFolio Example</h1>
+  <portfolio-example />
 </template>

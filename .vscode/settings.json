@@ -1,5 +1,5 @@
 {
-	"eslint.format.enable": true,
+  "eslint.format.enable": true,
   "editor.formatOnSave": true,
   "eslint.useFlatConfig": true,
   "editor.tabSize": 2,
@@ -20,5 +20,21 @@
   },
   "[typescript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  }
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "tailwindCSS.classAttributes": [
+    "class",
+    "ui"
+  ],
+  "tailwindCSS.experimental.classRegex": [
+    [
+      "ui:\\s*{([^)]*)\\s*}",
+      "(?:'|\"|`)([^']*)(?:'|\"|`)"
+    ]
+  ]
 }
