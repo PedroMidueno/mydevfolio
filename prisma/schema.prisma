@@ -3,7 +3,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -12,17 +11,161 @@ datasource db {
 }
 
 model Page {
-  id                  Int       @id @default(autoincrement())
-  slug                String    @unique @db.VarChar(100)
-  userName            String    @map("user_name") @db.VarChar(200)
-  userJobPositionName String?   @map("user_job_position_name") @db.VarChar(150)
-  userDescription     String?   @map("user_description") @db.VarChar(1000)
-  userId              Int       @unique @map("user_id")
-  isPublished         Boolean   @default(false) @map("is_published")
-  userImageFileKey    String?   @map("user_image_file_key") @db.VarChar(200)
-  createdAt           DateTime  @default(now()) @map("created_at") @db.Timestamp(6)
-  publishDate         DateTime? @map("publish_date") @db.Timestamp(6)
+  id                  Int                 @id @default(autoincrement())
+  slug                String              @unique @db.VarChar(100)
+  userFirstName       String              @map("user_first_name") @db.VarChar(200)
+  userLastName        String              @map("user_last_name") @db.VarChar(200)
+  userJobPositionName String?             @map("user_job_position_name") @db.VarChar(150)
+  userDescription     String?             @map("user_description") @db.VarChar(1000)
+  userId              String              @unique @map("user_id")
+  isPublished         Boolean             @default(false) @map("is_published")
+  userImageResourceId Int?                @unique @map("user_image_resource_id")
+  createdAt           DateTime            @default(now()) @map("created_at") @db.Timestamp(6)
+  publishDate         DateTime?           @map("publish_date") @db.Timestamp(6)
+  skills              TechSkillsOnPages[]
+  resources           Resource[]
+  userContact         UserContact[]
+  userExperiences     UserExperience[]
+  userEducation       UserEducation[]
+  userCertifications  UserCertification[]
+  metaData            PageMetaData[]
+  userImageResource   Resource?           @relation("page_user_image_resource", fields: [userImageResourceId], references: [id])
 
   @@index([slug])
   @@map("page")
+}
+
+model PageMetaData {
+  id                     Int       @id @default(autoincrement())
+  pageId                 Int       @map("page_id")
+  faviconResourceId      Int?      @unique @map("favicon_resource_id")
+  description            String?   @db.VarChar(200)
+  ogTitle                String?   @map("og_title") @db.VarChar(200)
+  ogDescription          String?   @map("og_description") @db.VarChar(200)
+  ogImageResourceId      Int?      @unique @map("og_image_resource_id")
+  ogUrl                  String?   @map("og_url") @db.VarChar(200)
+  twitterTitle           String?   @map("twitter_title") @db.VarChar(200)
+  twitterDescription     String?   @map("twitter_description") @db.VarChar(200)
+  twitterImageResourceId Int?      @unique @map("twitter_image_resource_id")
+  twitterCard            String?   @map("twitter_card") @db.VarChar(200)
+  page                   Page      @relation(fields: [pageId], references: [id])
+  faviconResource        Resource? @relation("favicon_resource", fields: [faviconResourceId], references: [id])
+  ogImageResource        Resource? @relation("og_image_resource", fields: [ogImageResourceId], references: [id])
+  twitterImageResource   Resource? @relation("twitter_image_resource", fields: [twitterImageResourceId], references: [id])
+
+  @@map("page_meta_data")
+}
+
+model TechSkillCat {
+  id       Int                    @id @default(autoincrement())
+  name     String                 @db.VarChar(100)
+  key      String                 @unique @db.VarChar(50)
+  logo     String                 @db.VarChar(200)
+  pages    TechSkillsOnPages[]
+  projects TechSkillsOnProjects[]
+
+  @@map("tech_skill_cat")
+}
+
+model TechSkillsOnPages {
+  pageId       Int          @map("page_id")
+  techSkillKey String       @map("tech_skill_key")
+  page         Page         @relation(fields: [pageId], references: [id])
+  techSkill    TechSkillCat @relation(fields: [techSkillKey], references: [key])
+
+  @@unique([pageId, techSkillKey])
+  @@map("tech_skills_on_pages")
+}
+
+model Resource {
+  id                    Int           @id @default(autoincrement())
+  fileKey               String        @map("file_key") @db.VarChar(200)
+  originalName          String        @map("original_name") @db.VarChar(200)
+  pageId                Int           @map("page_id")
+  createdAt             DateTime      @default(now()) @map("created_at") @db.Timestamp(6)
+  page                  Page          @relation(fields: [pageId], references: [id])
+  pageUserImage         Page?         @relation("page_user_image_resource")
+  faviconMetaTag        PageMetaData? @relation("favicon_resource")
+  ogImageMetaTag        PageMetaData? @relation("og_image_resource")
+  twitterImageMetaTag   PageMetaData? @relation("twitter_image_resource")
+  userContactResumeFile UserContact?
+  projectImage          Project?
+
+  @@map("resource")
+}
+
+model UserContact {
+  id                   Int       @id @default(autoincrement())
+  email                String    @db.VarChar(200)
+  resumeFileResourceId Int?      @unique @map("resume_file_resource_id")
+  githubUser           String?   @map("github_user") @db.VarChar(50)
+  linkedinUser         String?   @map("linkedin_user") @db.VarChar(50)
+  twitterUser          String?   @map("twitter_user") @db.VarChar(50)
+  pageId               Int       @map("page_id")
+  page                 Page      @relation(fields: [pageId], references: [id])
+  resumeFileResource   Resource? @relation(fields: [resumeFileResourceId], references: [id])
+
+  @@map("user_contact")
+}
+
+model UserExperience {
+  id             Int       @id @default(autoincrement())
+  jobTitle       String    @map("job_title") @db.VarChar(150)
+  company        String    @db.VarChar(150)
+  startDate      DateTime  @map("start_date") @db.Date
+  endDate        DateTime? @map("end_date") @db.Date
+  isCurrentJob   Boolean   @default(false) @map("is_current_job")
+  jobDescription String    @map("job_description") @db.VarChar(1000)
+  createdAt      DateTime  @default(now()) @db.Timestamp(6)
+  pageId         Int
+  page           Page      @relation(fields: [pageId], references: [id])
+
+  @@map("user_experience")
+}
+
+model Project {
+  id              Int                    @id @default(autoincrement())
+  title           String
+  imageResourceId Int?                   @unique @map("image_resource_id")
+  description     String
+  repositoryUrl   String?
+  deployUrl       String
+  createdAt       DateTime               @default(now()) @db.Timestamp(6)
+  techSkills      TechSkillsOnProjects[]
+  imageResource   Resource?              @relation(fields: [imageResourceId], references: [id])
+
+  @@map("project")
+}
+
+model TechSkillsOnProjects {
+  techSkillKey String       @map("teck_skill_key")
+  projectId    Int          @map("project_id")
+  techSkill    TechSkillCat @relation(fields: [techSkillKey], references: [key])
+  project      Project      @relation(fields: [projectId], references: [id])
+
+  @@unique([techSkillKey, projectId])
+  @@map("tech_skills_on_projects")
+}
+
+model UserEducation {
+  id              Int       @id @default(autoincrement())
+  title           String    @db.VarChar(150)
+  school          String    @db.VarChar(150)
+  startDate       DateTime  @map("start_date") @db.Date
+  endDate         DateTime? @map("end_date") @db.Date
+  isCurrentSchool Boolean   @default(false) @map("is_current_school")
+  pageId          Int       @map("page_id")
+  page            Page      @relation(fields: [pageId], references: [id])
+
+  @@map("user_education")
+}
+
+model UserCertification {
+  id                Int      @id @default(autoincrement())
+  title             String   @db.VarChar(150)
+  certificateIssuer String   @map("certificate_issuer") @db.VarChar(150)
+  issuedDate        DateTime @map("issued_date") @db.Date
+  certificateUrl    String   @map("certificate_url") @db.VarChar(300)
+  pageId            Int      @map("page_id")
+  page              Page     @relation(fields: [pageId], references: [id])
 }
