@@ -1,15 +1,10 @@
 <template>
-  <div>
-    <header>
-      <SignedOut>
-        <SignInButton />
-      </SignedOut>
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
-    </header>
-    <nui-button to="/example">
+  <div class="flex gap-4">
+    <u-button to="/example">
       Ir al ejemplo
-    </nui-button>
+    </u-button>
+    <u-button to="/dashboard">
+      Ir al dashboard
+    </u-button>
   </div>
 </template>
