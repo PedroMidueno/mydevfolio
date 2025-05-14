@@ -31,12 +31,12 @@
       </div>
 
       <div class="flex gap-2">
-        <nui-button icon="fa6-brands:github">
+        <u-button icon="fa6-brands:github">
           Repositorio
-        </nui-button>
-        <nui-button icon="fa6-solid:arrow-up-right-from-square">
+        </u-button>
+        <u-button icon="fa6-solid:arrow-up-right-from-square">
           Visitar
-        </nui-button>
+        </u-button>
       </div>
     </article>
 
@@ -67,12 +67,12 @@
       </div>
 
       <div class="flex gap-2">
-        <nui-button icon="fa6-brands:github">
+        <u-button icon="fa6-brands:github">
           Repositorio
-        </nui-button>
-        <nui-button icon="fa6-solid:arrow-up-right-from-square">
+        </u-button>
+        <u-button icon="fa6-solid:arrow-up-right-from-square">
           Visitar
-        </nui-button>
+        </u-button>
       </div>
     </article>
   </section>

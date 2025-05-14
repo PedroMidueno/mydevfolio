@@ -1,28 +1,28 @@
 <template>
   <section id="contact" class="flex flex-col items-center">
     <div class="flex gap-2 justify-center">
-      <nui-button icon="fa6-solid:envelope">
+      <u-button icon="fa6-solid:envelope">
         email@gmail.com
-      </nui-button>
+      </u-button>
 
-      <nui-button icon="fa6-solid:file-arrow-down">
+      <u-button icon="fa6-solid:file-arrow-down">
         Descargar cv
-      </nui-button>
+      </u-button>
     </div>
     <div class="flex">
-      <nui-button
+      <u-button
         size="xl"
         variant="ghost"
         icon="fa6-brands:github"
         class="text-white rounded-full"
       />
-      <nui-button
+      <u-button
         size="xl"
         variant="ghost"
         icon="fa6-brands:linkedin"
         class="text-white rounded-full"
       />
-      <nui-button
+      <u-button
         size="xl"
         variant="ghost"
         icon="fa6-brands:x-twitter"
