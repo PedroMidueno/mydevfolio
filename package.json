@@ -9,15 +9,25 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "db:seed": "npx -y tsx ./prisma/seeds",
+    "db:migrate": "npx -y prisma migrate dev",
+    "db:migrate:deploy": "npx -y prisma migrate deploy",
+    "prisma:generate": "npx -y prisma generate",
+    "prisma:format": "npx -y prisma format",
+    "db:reset": "npx -y prisma migrate reset"
   },
   "dependencies": {
     "@clerk/nuxt": "^1.6.3",
+    "@clerk/themes": "^2.2.43",
     "@nuxt/ui": "^3.1.1",
     "@prisma/nuxt": "^0.3.0",
+    "aws-sdk": "^2.1692.0",
     "nuxt": "^3.17.2",
     "vue": "^3.5.13",
-    "vue-router": "^4.5.1"
+    "vue-advanced-cropper": "^2.8.9",
+    "vue-router": "^4.5.1",
+    "zod": "^3.24.4"
   },
   "devDependencies": {
     "@iconify-json/fa6-brands": "^1.2.5",
