@@ -1,7 +1,7 @@
 <template>
-  <nui-app>
+  <u-app>
     <nuxt-layout>
       <nuxt-page />
     </nuxt-layout>
-  </nui-app>
+  </u-app>
 </template>
