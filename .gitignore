@@ -24,4 +24,4 @@ logs
 !.env.example
 
 # prisma client
-generated/prisma/*
+generated/prisma
