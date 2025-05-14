@@ -2,7 +2,7 @@ import { dark } from "@clerk/themes";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2024-11-01',
+  compatibilityDate: '2025-05-13',
   devtools: { enabled: true },
   runtimeConfig: {
     public: {
@@ -15,9 +15,6 @@ export default defineNuxtConfig({
     config: {
       stylistic: true
     }
-  },
-  ui: {
-    prefix: 'nui'
   },
   colorMode: {
     preference: 'dark',
