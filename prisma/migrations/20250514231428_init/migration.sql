@@ -82,8 +82,8 @@ CREATE TABLE "user_experience" (
     "end_date" DATE,
     "is_current_job" BOOLEAN NOT NULL DEFAULT false,
     "job_description" VARCHAR(1000) NOT NULL,
-    "createdAt" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "pageId" INTEGER NOT NULL,
+    "created_at" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "page_id" INTEGER NOT NULL,
 
     CONSTRAINT "user_experience_pkey" PRIMARY KEY ("id")
 );
@@ -94,8 +94,8 @@ CREATE TABLE "project" (
     "title" TEXT NOT NULL,
     "image_resource_id" INTEGER,
     "description" TEXT NOT NULL,
-    "repositoryUrl" TEXT,
-    "deployUrl" TEXT NOT NULL,
+    "repository_url" TEXT,
+    "deploy_url" TEXT NOT NULL,
     "createdAt" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "project_pkey" PRIMARY KEY ("id")
@@ -163,6 +163,9 @@ CREATE UNIQUE INDEX "tech_skills_on_pages_page_id_tech_skill_key_key" ON "tech_s
 CREATE UNIQUE INDEX "user_contact_resume_file_resource_id_key" ON "user_contact"("resume_file_resource_id");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "user_contact_page_id_key" ON "user_contact"("page_id");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "project_image_resource_id_key" ON "project"("image_resource_id");
 
 -- CreateIndex
@@ -199,7 +202,7 @@ ALTER TABLE "user_contact" ADD CONSTRAINT "user_contact_page_id_fkey" FOREIGN KE
 ALTER TABLE "user_contact" ADD CONSTRAINT "user_contact_resume_file_resource_id_fkey" FOREIGN KEY ("resume_file_resource_id") REFERENCES "resource"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "user_experience" ADD CONSTRAINT "user_experience_pageId_fkey" FOREIGN KEY ("pageId") REFERENCES "page"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "user_experience" ADD CONSTRAINT "user_experience_page_id_fkey" FOREIGN KEY ("page_id") REFERENCES "page"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "project" ADD CONSTRAINT "project_image_resource_id_fkey" FOREIGN KEY ("image_resource_id") REFERENCES "resource"("id") ON DELETE SET NULL ON UPDATE CASCADE;

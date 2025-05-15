@@ -24,7 +24,7 @@ model Page {
   publishDate         DateTime?           @map("publish_date") @db.Timestamp(6)
   skills              TechSkillsOnPages[]
   resources           Resource[]
-  userContact         UserContact[]
+  userContact         UserContact?
   userExperiences     UserExperience[]
   userEducation       UserEducation[]
   userCertifications  UserCertification[]
@@ -101,7 +101,7 @@ model UserContact {
   githubUser           String?   @map("github_user") @db.VarChar(50)
   linkedinUser         String?   @map("linkedin_user") @db.VarChar(50)
   twitterUser          String?   @map("twitter_user") @db.VarChar(50)
-  pageId               Int       @map("page_id")
+  pageId               Int       @unique @map("page_id")
   page                 Page      @relation(fields: [pageId], references: [id])
   resumeFileResource   Resource? @relation(fields: [resumeFileResourceId], references: [id])
 
@@ -116,8 +116,8 @@ model UserExperience {
   endDate        DateTime? @map("end_date") @db.Date
   isCurrentJob   Boolean   @default(false) @map("is_current_job")
   jobDescription String    @map("job_description") @db.VarChar(1000)
-  createdAt      DateTime  @default(now()) @db.Timestamp(6)
-  pageId         Int
+  createdAt      DateTime  @default(now()) @db.Timestamp(6) @map("created_at")
+  pageId         Int       @map("page_id")
   page           Page      @relation(fields: [pageId], references: [id])
 
   @@map("user_experience")
@@ -128,8 +128,8 @@ model Project {
   title           String
   imageResourceId Int?                   @unique @map("image_resource_id")
   description     String
-  repositoryUrl   String?
-  deployUrl       String
+  repositoryUrl   String?                @map("repository_url")
+  deployUrl       String                 @map("deploy_url")
   createdAt       DateTime               @default(now()) @db.Timestamp(6)
   techSkills      TechSkillsOnProjects[]
   imageResource   Resource?              @relation(fields: [imageResourceId], references: [id])
