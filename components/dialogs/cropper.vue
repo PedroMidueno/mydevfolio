@@ -51,9 +51,6 @@ const onCrop = async () => {
   if (canvas) {
     canvas.toBlob(blob => {
       const file = new File([blob as Blob], `${name}.webp`, { type })
-      console.log('width', canvas.width)
-      console.log('height', canvas.height)
-
       emit('crop', file)
     }, 'image/webp')
 
