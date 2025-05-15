@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import * as z from 'zod'
+import { z } from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
 import { LazyDialogsCropper } from '#components'
 
@@ -171,7 +171,7 @@ watch(isEditingData, value => {
             v-model="state.userDescription"
             class="w-full"
             maxlength="1000"
-            placeholder="Soy un asombroso desarrollador web full stack con tremendad habilidades en..."
+            placeholder="Soy un asombroso desarrollador web full stack con tremendas habilidades en..."
             :disabled="!isEditingData"
             :style="{ resize: 'none' }"
           />
@@ -179,7 +179,7 @@ watch(isEditingData, value => {
 
         <div class="flex gap-4">
           <u-button v-if="!isEditingData" @click="isEditingData = true">
-            Editar
+            Actualizar información
           </u-button>
           <u-button
             v-if="isEditingData"
