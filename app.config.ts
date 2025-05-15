@@ -7,6 +7,16 @@ export default defineAppConfig({
       slots: {
         base: 'cursor-pointer'
       }
+    },
+    input: {
+      slots: {
+        base: 'disabled:cursor-default disabled:opacity-100'
+      }
+    },
+    textarea: {
+      slots: {
+        base: 'disabled:cursor-default disabled:opacity-100'
+      }
     }
   }
 })
