@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { z } from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
+import { MIMETypes } from '~/types'
 
 const isEditingData = ref<boolean>(false)
 const { bucketPrefixUrl } = useRuntimeConfig().public
@@ -41,9 +42,18 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
 }
 
 const handleFilePickerChange = async (event: any) => {
+  const file = event.target?.files?.[0]
+  if (!file) return
+
+  if (file?.type !== MIMETypes.PDF) {
+    fireErrorToast('El archivo seleccionado debe ser formato PDF')
+    clearFilePicker()
+    return
+  }
+
   try {
     const form = new FormData()
-    form.append('file', event.target.files[0])
+    form.append('file', file)
     await $fetch('/api/user/contact/resume', {
       method: 'PUT',
       body: form
