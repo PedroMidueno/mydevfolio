@@ -5,5 +5,6 @@
     </h1>
     <builder-blocks-user-data />
     <builder-blocks-user-contact />
+    <builder-blocks-user-experience />
   </section>
 </template>
