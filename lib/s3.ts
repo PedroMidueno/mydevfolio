@@ -1,10 +1,10 @@
 import type { Buffer } from 'node:buffer'
 import { randomUUID } from 'node:crypto'
-import { PutObjectCommand, S3 } from '@aws-sdk/client-s3'
+import { S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3'
 
 export class S3Service {
   private static instance: S3Service | null = null
-  private s3Instance: S3 | null = null
+  private s3Instance: S3Client | null = null
 
   private constructor() { }
 
@@ -15,9 +15,9 @@ export class S3Service {
     return S3Service.instance
   }
 
-  private getS3(): S3 {
+  private getS3(): S3Client {
     if (!this.s3Instance) {
-      this.s3Instance = new S3({
+      this.s3Instance = new S3Client({
         endpoint: process.env.R2_ENDPOINT,
         region: process.env.R2_REGION,
         credentials: {
@@ -36,7 +36,9 @@ export class S3Service {
       Key: key
     }
 
-    return s3.getObject(params)
+    const command = new GetObjectCommand(params)
+
+    return s3.send(command)
   }
 
   public async uploadObject(folder: string, fileName: string, fileData: Buffer, contentType: string) {
@@ -52,7 +54,9 @@ export class S3Service {
     }
 
     const command = new PutObjectCommand(params)
+
     await s3.send(command)
+
     return {
       fileKey
     }
@@ -65,6 +69,8 @@ export class S3Service {
       Key: key
     }
 
-    return s3.deleteObject(params)
+    const command = new DeleteObjectCommand(params)
+
+    return s3.send(command)
   }
 }
