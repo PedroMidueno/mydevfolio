@@ -24,7 +24,7 @@ export default defineEventHandler(async event => {
   const fileName = fileData.filename!
   const mimeType = fileData.type!
 
-  const uploadResult = await objectStorage.uploadObject(folder, fileName, fileBuffer, mimeType)
+  const { fileKey } = await objectStorage.uploadObject(folder, fileName, fileBuffer, mimeType)
 
   const userPage = await prisma.page.findUniqueOrThrow({
     where: {
@@ -47,7 +47,7 @@ export default defineEventHandler(async event => {
   const newResource = await prisma.resource.create({
     data: {
       originalName: fileName,
-      fileKey: uploadResult.Key,
+      fileKey,
       pageId: userPage.id
     }
   })

@@ -39,12 +39,12 @@ export default defineEventHandler(async event => {
     }
   })
 
-  const uploadResult = await objectStorage.uploadObject(folder, fileName, fileBuffer, mimeType)
+  const { fileKey } = await objectStorage.uploadObject(folder, fileName, fileBuffer, mimeType)
 
   const newResource = await prisma.resource.create({
     data: {
       pageId: oldPageData.id,
-      fileKey: uploadResult?.Key ?? '',
+      fileKey,
       originalName: fileName
     }
   })

@@ -1,10 +1,10 @@
 import type { Buffer } from 'node:buffer'
 import { randomUUID } from 'node:crypto'
-import AWS from 'aws-sdk'
+import { PutObjectCommand, S3 } from '@aws-sdk/client-s3'
 
 export class S3Service {
   private static instance: S3Service | null = null
-  private s3Instance: AWS.S3 | null = null
+  private s3Instance: S3 | null = null
 
   private constructor() { }
 
@@ -15,16 +15,15 @@ export class S3Service {
     return S3Service.instance
   }
 
-  private getS3(): AWS.S3 {
+  private getS3(): S3 {
     if (!this.s3Instance) {
-      this.s3Instance = new AWS.S3({
+      this.s3Instance = new S3({
         endpoint: process.env.R2_ENDPOINT,
         region: process.env.R2_REGION,
         credentials: {
           accessKeyId: process.env.R2_ACCESS_KEY_ID as string,
           secretAccessKey: process.env.R2_SECRET_ACCESS_KEY as string
-        },
-        signatureVersion: 'v4'
+        }
       })
     }
     return this.s3Instance
@@ -37,22 +36,26 @@ export class S3Service {
       Key: key
     }
 
-    return s3.getObject(params).promise()
+    return s3.getObject(params)
   }
 
-  public uploadObject(folder: string, fileName: string, fileData: Buffer, contentType: string) {
+  public async uploadObject(folder: string, fileName: string, fileData: Buffer, contentType: string) {
     const s3 = this.getS3()
     const bucket = process.env.R2_BUCKET_NAME!
-    const uuidFileName = `${folder}/${randomUUID()}-${fileName}`
+    const fileKey = `${folder}/${randomUUID()}-${fileName}`
 
     const params = {
       Bucket: bucket,
-      Key: uuidFileName,
+      Key: fileKey,
       Body: fileData,
       ContentType: contentType
     }
 
-    return s3.upload(params).promise()
+    const command = new PutObjectCommand(params)
+    await s3.send(command)
+    return {
+      fileKey
+    }
   }
 
   public deleteObject(key: string) {
@@ -62,6 +65,6 @@ export class S3Service {
       Key: key
     }
 
-    return s3.deleteObject(params).promise()
+    return s3.deleteObject(params)
   }
 }
