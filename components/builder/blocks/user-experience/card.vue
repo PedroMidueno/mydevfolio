@@ -60,7 +60,7 @@ const confirmDeleteExperience = () => {
       }
     ],
     duration: 10000,
-    icon: 'i-material-symbols-warning'
+    icon: 'fa6-solid:triangle-exclamation'
   }
 
   showToast(toastConfig)

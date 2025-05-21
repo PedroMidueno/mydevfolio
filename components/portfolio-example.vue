@@ -5,17 +5,17 @@
     </Head>
 
     <main id="devfolio-container" as="main" class="border w-5xl flex flex-col items-center gap-8 px-8">
-      <blocks-hero />
+      <page-blocks-hero />
 
-      <blocks-contact />
+      <page-blocks-contact />
 
-      <blocks-experience />
+      <page-blocks-experience />
 
-      <blocks-projects />
+      <page-blocks-projects />
 
-      <blocks-skills />
+      <page-blocks-skills />
 
-      <blocks-education />
+      <page-blocks-education />
 
       <blocks-certificates />
     </main>
