@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { DialogsExperienceForm } from '#components'
 
-const experienceForm = ref<typeof DialogsExperienceForm>()
+const experienceForm = ref<InstanceType<typeof DialogsExperienceForm>>()
 
 const { data: userExperiences, refresh } = await useFetch('/api/user/experience', {
   method: 'get'
@@ -14,7 +14,7 @@ interface IExperienceItem {
   jobDescription: string | undefined
   startDate: string | undefined
   endDate: string | undefined
-  isCurrentJob: boolean | undefined
+  isCurrentJob: boolean
 }
 </script>
 
@@ -37,7 +37,7 @@ interface IExperienceItem {
             v-bind="({ ...userExperience } as IExperienceItem)"
             :key="userExperience.id"
             @update-records="refresh"
-            @request-update="(data: IExperienceItem) => { experienceForm?.open(true, data) }"
+            @request-update="(data: IExperienceItem) => { experienceForm!.open(true, data) }"
           />
         </template>
         <span v-else class="text-gray-400">

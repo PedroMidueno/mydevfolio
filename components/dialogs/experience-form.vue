@@ -66,7 +66,7 @@ const parseDateString = (dateString: string) => {
   return date
 }
 
-const open = (isUpdate = false, dataToUpdate: IForm & { id: number } | null = null) => {
+const open = (isUpdate = false, dataToUpdate: IForm & { id: number | undefined } | null = null) => {
   updating.value = isUpdate
   if (isUpdate) {
     recordToUpdateId.value = dataToUpdate?.id || null
