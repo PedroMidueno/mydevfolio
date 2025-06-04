@@ -96,7 +96,7 @@ defineExpose({ open })
 </script>
 
 <template>
-  <UDrawer
+  <u-drawer
     v-model:open="showDialog"
     :dismissible="false"
     :title="updating ? 'Editando experiencia laboral' : 'Creando experiencia laboral'"
@@ -203,5 +203,5 @@ defineExpose({ open })
         </div>
       </u-form>
     </template>
-  </UDrawer>
+  </u-drawer>
 </template>

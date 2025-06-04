@@ -7,7 +7,7 @@ export const showToast = (options: Partial<ToastProps>) => {
 export const fireErrorToast = (errorMessage = 'Ocurrió un error inesperado') => {
   showToast({
     title: errorMessage,
-    icon: 'i-mdi-error',
+    icon: 'fa6-solid:circle-exclamation',
     color: 'error'
   })
 }
@@ -15,7 +15,7 @@ export const fireErrorToast = (errorMessage = 'Ocurrió un error inesperado') =>
 export const fireSuccessToast = (successMessage = 'Operación realizada exitosamente') => {
   showToast({
     title: successMessage,
-    icon: 'i-mdi-success',
+    icon: 'fa6-solid:check',
     color: 'success'
   })
 }

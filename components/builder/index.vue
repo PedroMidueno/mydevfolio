@@ -6,5 +6,6 @@
     <builder-blocks-user-data />
     <builder-blocks-user-contact />
     <builder-blocks-user-experience />
+    <builder-blocks-user-project />
   </section>
 </template>

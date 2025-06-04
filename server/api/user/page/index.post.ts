@@ -1,3 +1,4 @@
+import { clerkClient } from '@clerk/nuxt/server'
 import { z } from 'zod'
 import prisma from '~/lib/prisma'
 
@@ -18,12 +19,14 @@ export default defineEventHandler(async event => {
     })
   }
 
+  const authenticatedUser = await clerkClient(event).users.getUser(userId)
+
   const body = await readValidatedBody(event, body => bodySchema.safeParse(body))
   if (!body.success) {
     throw createError('No se proporcionaron todos los datos')
   }
 
-  await prisma.page.create({
+  const userPage = await prisma.page.create({
     data: {
       slug: body.data.slug,
       userId,
@@ -32,5 +35,17 @@ export default defineEventHandler(async event => {
     }
   })
 
-  return 'Success'
+  const userGithubAccount = authenticatedUser.externalAccounts.find(account => {
+    return account.provider === 'oauth_github'
+  })
+
+  await prisma.userContact.create({
+    data: {
+      pageId: userPage.id,
+      email: authenticatedUser.emailAddresses[0].emailAddress,
+      githubUser: userGithubAccount?.username
+    }
+  })
+
+  return userPage
 })

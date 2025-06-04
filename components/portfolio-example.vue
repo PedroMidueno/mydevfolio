@@ -17,7 +17,7 @@
 
       <page-blocks-education />
 
-      <blocks-certificates />
+      <page-blocks-certificates />
     </main>
 
     <footer class="mt-4">
