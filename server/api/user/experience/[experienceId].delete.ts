@@ -10,7 +10,7 @@ export default defineEventHandler(async event => {
     })
   }
 
-  const id = parseInt(event.context.params?.experienceId as string)
+  const id = parseInt(event.context.params?.experienceId as string, 10)
 
   if (!Number.isInteger(id)) {
     throw createError({
