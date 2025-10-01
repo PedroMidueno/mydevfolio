@@ -7,7 +7,8 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DB_DIRECT_URL")
+  url      = env("DATABASE_URL")
+  directUrl = env("DB_DIRECT_URL")
 }
 
 model Page {
@@ -29,6 +30,7 @@ model Page {
   userEducation       UserEducation[]
   userCertifications  UserCertification[]
   metaData            PageMetaData[]
+  projects            Project[]
   userImageResource   Resource?           @relation("page_user_image_resource", fields: [userImageResourceId], references: [id])
 
   @@index([slug])
@@ -127,12 +129,14 @@ model Project {
   id              Int                    @id @default(autoincrement())
   title           String
   imageResourceId Int?                   @unique @map("image_resource_id")
-  description     String
+  description     String                 @db.VarChar(1000)
   repositoryUrl   String?                @map("repository_url")
   deployUrl       String                 @map("deploy_url")
   createdAt       DateTime               @default(now()) @db.Timestamp(6)
   techSkills      TechSkillsOnProjects[]
+  pageId          Int                    @map("page_id")
   imageResource   Resource?              @relation(fields: [imageResourceId], references: [id])
+  page            Page                   @relation(fields: [pageId], references: [id])
 
   @@map("project")
 }
@@ -141,7 +145,7 @@ model TechSkillsOnProjects {
   techSkillKey String       @map("teck_skill_key")
   projectId    Int          @map("project_id")
   techSkill    TechSkillCat @relation(fields: [techSkillKey], references: [key])
-  project      Project      @relation(fields: [projectId], references: [id])
+  project      Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
 
   @@unique([techSkillKey, projectId])
   @@map("tech_skills_on_projects")

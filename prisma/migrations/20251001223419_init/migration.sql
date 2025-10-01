@@ -93,10 +93,11 @@ CREATE TABLE "project" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "image_resource_id" INTEGER,
-    "description" TEXT NOT NULL,
+    "description" VARCHAR(1000) NOT NULL,
     "repository_url" TEXT,
     "deploy_url" TEXT NOT NULL,
     "createdAt" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "page_id" INTEGER NOT NULL,
 
     CONSTRAINT "project_pkey" PRIMARY KEY ("id")
 );
@@ -208,10 +209,13 @@ ALTER TABLE "user_experience" ADD CONSTRAINT "user_experience_page_id_fkey" FORE
 ALTER TABLE "project" ADD CONSTRAINT "project_image_resource_id_fkey" FOREIGN KEY ("image_resource_id") REFERENCES "resource"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "project" ADD CONSTRAINT "project_page_id_fkey" FOREIGN KEY ("page_id") REFERENCES "page"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "tech_skills_on_projects" ADD CONSTRAINT "tech_skills_on_projects_teck_skill_key_fkey" FOREIGN KEY ("teck_skill_key") REFERENCES "tech_skill_cat"("key") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "tech_skills_on_projects" ADD CONSTRAINT "tech_skills_on_projects_project_id_fkey" FOREIGN KEY ("project_id") REFERENCES "project"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "tech_skills_on_projects" ADD CONSTRAINT "tech_skills_on_projects_project_id_fkey" FOREIGN KEY ("project_id") REFERENCES "project"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "user_education" ADD CONSTRAINT "user_education_page_id_fkey" FOREIGN KEY ("page_id") REFERENCES "page"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
