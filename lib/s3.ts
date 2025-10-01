@@ -20,6 +20,7 @@ export class S3Service {
       this.s3Instance = new S3Client({
         endpoint: process.env.R2_ENDPOINT,
         region: process.env.R2_REGION,
+        forcePathStyle: true,
         credentials: {
           accessKeyId: process.env.R2_ACCESS_KEY_ID as string,
           secretAccessKey: process.env.R2_SECRET_ACCESS_KEY as string
