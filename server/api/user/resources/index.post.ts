@@ -28,12 +28,12 @@ export default defineEventHandler(async event => {
   await prisma.resource.create({
     data: {
       pageId: 1,
-      fileKey: uploadResult.Key,
+      fileKey: uploadResult.fileKey,
       originalName: fileName
     }
   })
 
   return {
-    fileKey: uploadResult.Key
+    fileKey: uploadResult.fileKey
   }
 })

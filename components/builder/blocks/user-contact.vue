@@ -166,7 +166,7 @@ watch(isEditingData, () => {
               placeholder="tu-usuario-de-github"
               :ui="{
                 base: 'pl-[135px]',
-                leading: 'pointer-events-none',
+                leading: 'pointer-events-none'
               }"
             >
               <template #leading>
@@ -185,7 +185,7 @@ watch(isEditingData, () => {
               placeholder="tu-usuario-de-linkedin"
               :ui="{
                 base: 'pl-[198px]',
-                leading: 'pointer-events-none',
+                leading: 'pointer-events-none'
               }"
             >
               <template #leading>
@@ -204,7 +204,7 @@ watch(isEditingData, () => {
               placeholder="tu-usuario-de-x"
               :ui="{
                 base: 'pl-[102px]',
-                leading: 'pointer-events-none',
+                leading: 'pointer-events-none'
               }"
             >
               <template #leading>

@@ -92,7 +92,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
                 placeholder="tu-código-unico"
                 :ui="{
                   base: 'pl-[154px]',
-                  leading: 'pointer-events-none',
+                  leading: 'pointer-events-none'
                 }"
               >
                 <template #leading>

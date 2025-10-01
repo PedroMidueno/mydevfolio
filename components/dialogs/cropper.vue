@@ -74,10 +74,10 @@ defineExpose({
     :ui="{
       content: 'max-w-[1000px] w-[600px]',
       overlay: 'bg-black/40',
-      body: 'flex justify-center items-center',
+      body: 'flex justify-center items-center'
     }"
     :close="{
-      class: 'hidden',
+      class: 'hidden'
     }"
   >
     <template #body>
