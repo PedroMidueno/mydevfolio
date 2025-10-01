@@ -2,13 +2,13 @@
 import type { ToastProps } from '#ui/types'
 
 interface IExperienceItem {
-  id: number | undefined
-  jobTitle: string | undefined
-  company: string | undefined
-  jobDescription: string | undefined
-  startDate: string | undefined
-  endDate: string | undefined
-  isCurrentJob: boolean | undefined
+  id?: number
+  jobTitle?: string
+  company?: string
+  jobDescription?: string
+  startDate?: string
+  endDate?: string
+  isCurrentJob?: boolean
 }
 
 const props = defineProps<IExperienceItem>()
