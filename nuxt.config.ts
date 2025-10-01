@@ -10,11 +10,21 @@ export default defineNuxtConfig({
     }
   },
   modules: ['@nuxt/eslint', '@nuxt/ui', '@prisma/nuxt', '@clerk/nuxt'],
+  vite: {
+    resolve: {
+      alias: {
+        '.prisma/client/index-browser': './node_modules/.prisma/client/index-browser.js',
+      },
+    },
+  },
   css: ['@/assets/css/main.css'],
   eslint: {
     config: {
       stylistic: true
     }
+  },
+  ui: {
+    fonts: false,
   },
   colorMode: {
     preference: 'dark',
