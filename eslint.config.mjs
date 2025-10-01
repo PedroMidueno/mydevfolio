@@ -22,12 +22,20 @@ export default withNuxt()
           void: 'always',
           component: 'always'
         }
-      }]
+      }],
+      'vue/comma-dangle': ['error', 'never'],
+      'vue/no-unused-vars': ['warn']
     }
   })
   .override('nuxt/typescript/rules', {
     rules: {
-      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/no-unused-vars': ["warn", {
+      "args": "after-used",
+      "argsIgnorePattern": "^_",
+      "varsIgnorePattern": "^_",
+      "caughtErrors": "none",
+      "ignoreRestSiblings": true 
+    }],
       '@typescript-eslint/no-explicit-any': 'off'
     }
   })
