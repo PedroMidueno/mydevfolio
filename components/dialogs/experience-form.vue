@@ -47,7 +47,6 @@ const state = reactive<IForm>({
 })
 
 const onSubmit = async (event: FormSubmitEvent<Schema>) => {
-  console.log(event.data)
   try {
     await $fetch(`${updating.value ? `/api/user/experience/${recordToUpdateId.value}` : '/api/user/experience'}`, {
       method: `${updating.value ? 'put' : 'post'}`,
@@ -101,7 +100,7 @@ defineExpose({ open })
     :dismissible="false"
     :title="updating ? 'Editando experiencia laboral' : 'Creando experiencia laboral'"
     :ui="{
-      container: 'max-w-[1400px] mx-auto',
+      container: 'max-w-[1400px] mx-auto'
     }"
     :handle="false"
     :description="
@@ -181,8 +180,7 @@ defineExpose({ open })
         >
           <u-textarea
             v-model="state.jobDescription"
-
-            max-length="1000"
+            maxlength="1000"
             :ui="{ base: 'resize-none' }"
             class="w-full"
             placeholder="Mi primera chambaaa 🎵🎶"
