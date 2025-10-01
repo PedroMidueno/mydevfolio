@@ -1,16 +1,16 @@
-export type TechSkillName = 'html' | 'css' | 'javascript' | 'tailwindcss' | 'reactjs' |
-  'vuejs' | 'angular' | 'astrojs' | 'nodejs' | 'expressjs' | 'nestjs' | 'bash' |
-  'c' | 'cpp' | 'cobol' | 'dart' | 'graphql' | 'go' | 'java' | 'kotlin' | 'markdown' |
-  'php' | 'python' | 'ruby' | 'rust' | 'sass' | 'swift' | 'typescript' | 'zig' |
-  'bun' | 'deno' | 'drizzleorm' | 'prismaorm' | 'jquery' | 'lit' | 'piniastore' |
-  'preact' | 'prettier' | 'reactrouter' | 'redux' | 'rxjs' | 'shadcnui' | 'styledcomponents' |
-  'svelte' | 'tanstack' | 'taurijs' | 'tensorflow' | 'threejs' | 'webcomponents' |
-  'zod' | 'stripe' | 'spring' | 'csharp' | 'nuxtjs' | 'nextjs'
+export type TechSkillKey = 'html' | 'css' | 'javascript' | 'tailwindcss' | 'reactjs'
+  | 'vuejs' | 'angular' | 'astrojs' | 'nodejs' | 'expressjs' | 'nestjs' | 'bash'
+  | 'c' | 'cpp' | 'cobol' | 'dart' | 'graphql' | 'go' | 'java' | 'kotlin' | 'markdown'
+  | 'php' | 'python' | 'ruby' | 'rust' | 'sass' | 'swift' | 'typescript' | 'zig'
+  | 'bun' | 'deno' | 'drizzleorm' | 'prismaorm' | 'jquery' | 'lit' | 'piniastore'
+  | 'preact' | 'prettier' | 'reactrouter' | 'redux' | 'rxjs' | 'shadcnui' | 'styledcomponents'
+  | 'svelte' | 'tanstack' | 'taurijs' | 'tensorflow' | 'threejs' | 'webcomponents'
+  | 'zod' | 'stripe' | 'spring' | 'csharp' | 'nuxtjs' | 'nextjs'
 
 export interface ITechSkillCat {
   name: string
   logo: string
-  key: TechSkillName
+  key: TechSkillKey
 }
 
 export const techSkillCat: ITechSkillCat[] = [

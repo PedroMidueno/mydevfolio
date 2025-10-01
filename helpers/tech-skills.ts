@@ -1,6 +1,4 @@
-import { techSkillCat } from '~/prisma/seeds/catalogs/tech-skills'
-
-export type TechSkillKey = (typeof techSkillCat)[number]['key']
+import { techSkillCat, type TechSkillKey } from '~/prisma/seeds/catalogs/tech-skills'
 
 const techSkillsLogos = new Map<TechSkillKey, string>()
 

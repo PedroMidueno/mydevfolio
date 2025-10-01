@@ -4,9 +4,10 @@ export const showToast = (options: Partial<ToastProps>) => {
   useToast().add(options)
 }
 
-export const fireErrorToast = (errorMessage = 'Ocurrió un error inesperado') => {
+export const fireErrorToast = (errorTitle = 'Ocurrió un error inesperado', errorDescription = '') => {
   showToast({
-    title: errorMessage,
+    title: errorTitle,
+    description: errorDescription ? errorDescription : undefined,
     icon: 'fa6-solid:circle-exclamation',
     color: 'error'
   })
