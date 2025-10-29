@@ -7,5 +7,6 @@
     <builder-blocks-user-contact />
     <builder-blocks-user-experience />
     <builder-blocks-user-project />
+    <builder-blocks-user-skills />
   </section>
 </template>
