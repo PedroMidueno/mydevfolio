@@ -51,7 +51,7 @@ export const techSkillCat: ITechSkillCat[] = [
   },
   {
     name: 'AstroJs',
-    logo: 'https://svgl.app/library/astro_dark.svg',
+    logo: 'https://svgl.app/library/astro-icon-dark.svg',
     key: 'astrojs'
   },
   {
@@ -246,7 +246,7 @@ export const techSkillCat: ITechSkillCat[] = [
   },
   {
     name: 'TensorFlow',
-    logo: 'https://svgl.app/library/tensorflow.svg',
+    logo: 'https://svgl.app/library/tensorflow-icon-dark.svg',
     key: 'tensorflow'
   },
   {
