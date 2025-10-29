@@ -60,6 +60,7 @@ watch(selectedTech, async selected => {
         :ui="{
           itemLeadingAvatar: 'rounded-none [&_img]:object-contain bg-transparent'
         }"
+        placeholder="Buscar"
         class="ml-2"
       />
       <u-button
