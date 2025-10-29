@@ -24,7 +24,7 @@ const onDeleteProject = async () => {
 
 const confirmDeleteProject = () => {
   const toastConfig: Partial<ToastProps> = {
-    title: '¿Eliminar proyecto permanentemente??',
+    title: '¿Eliminar proyecto permanentemente?',
     description: 'Esta acción no se puede deshacer',
     actions: [
       {
