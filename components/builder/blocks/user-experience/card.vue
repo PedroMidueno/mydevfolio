@@ -14,28 +14,6 @@ interface IExperienceItem {
 const props = defineProps<IExperienceItem>()
 const emit = defineEmits(['request-update', 'update-records'])
 
-const MONTHS = [
-  'Enero',
-  'Febrero',
-  'Marzo',
-  'Abril',
-  'Mayo',
-  'Junio',
-  'Julio',
-  'Agosto',
-  'Septiembre',
-  'Octubre',
-  'Noviembre',
-  'Diciembre'
-]
-
-const parseDateTimeString = (string: string) => {
-  const [date] = string.split('T')
-  const [year, month] = date.split('-')
-
-  return `${MONTHS[+month]} ${year}`
-}
-
 const onDeleteExperience = async () => {
   await $fetch(`/api/user/experience/${props.id}`, {
     method: 'DELETE'
@@ -84,6 +62,9 @@ const confirmDeleteExperience = () => {
     <p class="whitespace-pre-line h-40 overflow-y-auto border border-gray-600 rounded-md p-2">
       {{ props.jobDescription }}
     </p>
+
+    <hr class="w-full border border-gray-600 my-2" />
+
 
     <div class="flex gap-2 mt-4 justify-end">
       <u-button variant="outline" color="error" @click="confirmDeleteExperience">

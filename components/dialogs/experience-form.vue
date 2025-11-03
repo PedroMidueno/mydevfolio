@@ -59,12 +59,6 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
   }
 }
 
-const parseDateString = (dateString: string) => {
-  const [date] = dateString.split('T')
-
-  return date
-}
-
 const open = (isUpdate = false, dataToUpdate: IForm & { id: number | undefined } | null = null) => {
   updating.value = isUpdate
   if (isUpdate) {
