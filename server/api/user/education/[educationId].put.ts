@@ -25,20 +25,18 @@ export default defineEventHandler(async event => {
     throw body.error.issues
   }
 
-  const userPage = await prisma.page.findUniqueOrThrow({
-    where: {
-      userId
-    }
-  })
+  const educationId = parseInt(event.context.params?.educationId as string, 10)
 
   const { startDate, endDate, ...rest } = body.data
 
-  await prisma.userEducation.create({
+  await prisma.userEducation.update({
+    where: {
+      id: educationId
+    },
     data: {
       ...rest,
       startDate: new Date(startDate),
-      endDate: endDate ? new Date(endDate) : undefined,
-      pageId: userPage.id
+      endDate: endDate ? new Date(endDate) : undefined
     }
   })
 })
