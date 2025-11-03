@@ -17,6 +17,11 @@ export default defineAppConfig({
       slots: {
         base: 'disabled:cursor-default disabled:opacity-100'
       }
+    },
+    formField: {
+      slots: {
+        root: 'min-h-[90px]'
+      }
     }
   }
 })
