@@ -24,7 +24,7 @@ const onDeleteTechSkill = async () => {
 
 <template>
   <div class="flex flex-col items-center gap-2 relative">
-    <u-tooltip text="Remover">
+    <u-tooltip :text="`Remover ${props.name}`">
       <u-button
         size="xs"
         icon="fa6-solid:xmark"
