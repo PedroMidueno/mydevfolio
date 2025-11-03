@@ -8,5 +8,6 @@
     <builder-blocks-user-experience />
     <builder-blocks-user-project />
     <builder-blocks-user-skills />
+    <builder-blocks-user-education />
   </section>
 </template>
