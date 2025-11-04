@@ -2,6 +2,7 @@
 import type { ToastProps } from '@nuxt/ui'
 import type { IProjectItem } from './types'
 
+const isLoading = ref(true)
 const props = defineProps<IProjectItem>()
 const emit = defineEmits<{
   (e: 'request-update', project: IProjectItem): void
@@ -11,6 +12,7 @@ const emit = defineEmits<{
 const { bucketPrefixUrl } = useRuntimeConfig().public
 
 const onDeleteProject = async () => {
+  isLoading.value = true
   try {
     await $fetch(`/api/user/projects/${props.id}`, {
       method: 'DELETE'
@@ -19,6 +21,8 @@ const onDeleteProject = async () => {
     emit('refresh-list')
   } catch (error) {
     fireErrorToast('Ocurrió un error al eliminar el proyecto')
+  } finally {
+    isLoading.value = false
   }
 }
 
@@ -113,10 +117,15 @@ const confirmDeleteProject = () => {
     <hr class="w-full border border-gray-600 my-2" />
 
     <div class="flex justify-end w-full gap-2">
-      <u-button variant="outline" color="error" @click="confirmDeleteProject">
+      <u-button
+        variant="outline"
+        color="error"
+        :loading="isLoading"
+        @click="confirmDeleteProject"
+      >
         Eliminar
       </u-button>
-      <u-button @click="emit('request-update', { ...props, imageKey: `${bucketPrefixUrl}/${imageKey}` })">
+      <u-button :disabled="isLoading" @click="emit('request-update', { ...props, imageKey: `${bucketPrefixUrl}/${imageKey}` })">
         Editar
       </u-button>
     </div>

@@ -10,6 +10,7 @@ const requiredMessage = 'Este campo es obligatorio'
 const form = useTemplateRef('form')
 const showDialog = ref<boolean>(false)
 const updating = ref<boolean>(false)
+const isLoading = ref(false)
 const projectToUpdateId = ref<number | null>(null)
 const projectImageFile = ref<File | null>(null)
 const projectImageUrl = ref('')
@@ -58,6 +59,7 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
     return
   }
 
+  isLoading.value = true
   try {
     const form = new FormData()
     form.append('title', event.data.title)
@@ -89,6 +91,8 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
     close()
   } catch (error) {
     fireErrorToast(updating.value ? 'Ocurrió un error al actualizar el proyecto' : 'Ocurrió un error al crear el proyecto')
+  } finally {
+    isLoading.value = false
   }
 }
 
@@ -286,11 +290,12 @@ const toggleTechSkill = ({ currentScope, techItem }: { currentScope: 'added' | '
           <u-button
             variant="outline"
             color="error"
+            :disabled="isLoading"
             @click="close"
           >
             Cancelar
           </u-button>
-          <u-button type="submit">
+          <u-button type="submit" :loading="isLoading">
             Guardar
           </u-button>
         </div>

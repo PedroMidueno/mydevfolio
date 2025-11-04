@@ -3,7 +3,7 @@ import type { LazyDialogsProjectForm } from '#components'
 import type { IProjectItem } from './types'
 
 const projectForm = useTemplateRef<InstanceType<typeof LazyDialogsProjectForm>>('projectForm')
-const { data: userProjects, refresh } = await useFetch('/api/user/projects', {
+const { data: userProjects, refresh, pending } = await useFetch('/api/user/projects', {
   method: 'get'
 })
 </script>
@@ -16,7 +16,7 @@ const { data: userProjects, refresh } = await useFetch('/api/user/projects', {
     </h2>
 
     <div class="w-full flex flex-col gap-4 items-start">
-      <u-button @click="projectForm?.open()">
+      <u-button :loading="pending" @click="projectForm?.open()">
         Agregar proyecto
       </u-button>
 
