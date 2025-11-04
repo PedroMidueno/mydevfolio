@@ -5,6 +5,7 @@ import z from 'zod'
 const requiredMessage = 'Este campo es obligatorio'
 const showDialog = ref(false)
 const isUpdating = ref(false)
+const isLoading = ref(false)
 const form = useTemplateRef('form')
 const emit = defineEmits<{
   (e: 'refresh-list'): void
@@ -26,6 +27,7 @@ const state = reactive<Partial<Schema>>({
 })
 
 const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
+  isLoading.value = true
   try {
     if (isUpdating.value) {
       await $fetch(`/api/user/certifications/${idToUpdate}`, {
@@ -44,6 +46,8 @@ const handleSubmit = async (event: FormSubmitEvent<Schema>) => {
     close()
   } catch (error) {
     fireErrorToast('Ocurrió un error al guardar la certificación')
+  } finally {
+    isLoading.value = false
   }
 }
 
@@ -143,11 +147,12 @@ defineExpose({ open })
           <u-button
             variant="outline"
             color="error"
+            :disabled="isLoading"
             @click="close"
           >
             Cancelar
           </u-button>
-          <u-button type="submit">
+          <u-button :loading="isLoading" type="submit">
             Guardar
           </u-button>
         </div>

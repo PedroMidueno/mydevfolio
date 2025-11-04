@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { LazyDialogsCertificationForm } from '#components'
 
-const { data: userCertifications, refresh } = await useFetch('/api/user/certifications', { method: 'GET' })
+const { data: userCertifications, refresh, pending } = await useFetch('/api/user/certifications', { method: 'GET' })
 const certificationForm = useTemplateRef<InstanceType<typeof LazyDialogsCertificationForm>>('certificationForm')
 </script>
 
@@ -13,7 +13,7 @@ const certificationForm = useTemplateRef<InstanceType<typeof LazyDialogsCertific
     </h2>
 
     <div class="w-full flex flex-col gap-4 items-start">
-      <u-button @click="certificationForm?.open()">
+      <u-button :loading="pending" @click="certificationForm?.open()">
         Agregar certificación
       </u-button>
 

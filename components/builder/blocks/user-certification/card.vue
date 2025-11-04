@@ -8,7 +8,7 @@ type Props = {
   issuedDate: string
   certificateUrl: string
 }
-
+const isLoading = ref(false)
 const props = defineProps<Props>()
 const emit = defineEmits<{
   (e: 'request-update', data: Props): void
@@ -16,6 +16,7 @@ const emit = defineEmits<{
 }>()
 
 const onDeleteCertification = async () => {
+  isLoading.value = true
   try {
     await $fetch(`/api/user/certifications/${props.id}`, {
       method: 'DELETE'
@@ -24,6 +25,8 @@ const onDeleteCertification = async () => {
     fireSuccessToast('Certificación eliminada')
   } catch (error) {
     fireErrorToast('Ocurrió un error al intentar eliminar la certificación')
+  } finally {
+    isLoading.value = false
   }
 }
 
@@ -71,10 +74,15 @@ const confirmDeleteCertification = () => {
     <hr class="w-full border border-gray-600" />
 
     <div class="flex gap-2 mt-4 justify-end">
-      <u-button variant="outline" color="error" @click="confirmDeleteCertification">
+      <u-button
+        variant="outline"
+        color="error"
+        :loading="isLoading"
+        @click="confirmDeleteCertification"
+      >
         Eliminar
       </u-button>
-      <u-button @click="emit('request-update', props)">
+      <u-button :disabled="isLoading" @click="emit('request-update', props)">
         Editar
       </u-button>
     </div>
