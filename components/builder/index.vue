@@ -9,5 +9,6 @@
     <builder-blocks-user-project />
     <builder-blocks-user-skills />
     <builder-blocks-user-education />
+    <builder-blocks-user-certification />
   </section>
 </template>
