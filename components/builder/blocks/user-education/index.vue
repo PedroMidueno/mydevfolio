@@ -11,7 +11,7 @@ type UserEducation = {
 }
 
 const educationForm = useTemplateRef<InstanceType<typeof LazyDialogsEducationForm>>('educationForm')
-const { data: userEducation, refresh } = await useFetch('/api/user/education')
+const { data: userEducation, refresh, pending } = await useFetch('/api/user/education')
 </script>
 
 <template>
@@ -22,7 +22,7 @@ const { data: userEducation, refresh } = await useFetch('/api/user/education')
     </h2>
 
     <div class="w-full flex flex-col gap-4 items-start">
-      <u-button @click="educationForm?.open()">
+      <u-button :loading="pending" @click="educationForm?.open()">
         Agregar formación
       </u-button>
 

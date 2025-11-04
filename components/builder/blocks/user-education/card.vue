@@ -10,6 +10,7 @@ type Props = {
   isCurrentSchool: boolean
 }
 
+const isLoading = ref(false)
 const props = defineProps<Props>()
 const emit = defineEmits<{
   (e: 'request-update', data: Props): void
@@ -17,6 +18,7 @@ const emit = defineEmits<{
 }>()
 
 const onDeleteEducation = async () => {
+  isLoading.value = true
   try {
     await $fetch(`/api/user/education/${props.id}`, {
       method: 'DELETE'
@@ -25,6 +27,8 @@ const onDeleteEducation = async () => {
     fireSuccessToast('Formación eliminada')
   } catch (error) {
     fireErrorToast('Ocurrió un error al intentar borrar')
+  } finally {
+    isLoading.value = false
   }
 }
 
@@ -67,10 +71,15 @@ const confirmDeleteEducation = () => {
     <hr class="w-full border border-gray-600" />
 
     <div class="flex gap-2 mt-4 justify-end">
-      <u-button variant="outline" color="error" @click="confirmDeleteEducation">
+      <u-button
+        variant="outline"
+        color="error"
+        :loading="isLoading"
+        @click="confirmDeleteEducation"
+      >
         Eliminar
       </u-button>
-      <u-button @click="emit('request-update', props)">
+      <u-button :disabled="isLoading" @click="emit('request-update', props)">
         Editar
       </u-button>
     </div>
