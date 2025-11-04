@@ -2,7 +2,7 @@
 import type { ToastProps } from '@nuxt/ui'
 import type { IProjectItem } from './types'
 
-const isLoading = ref(true)
+const isLoading = ref(false)
 const props = defineProps<IProjectItem>()
 const emit = defineEmits<{
   (e: 'request-update', project: IProjectItem): void
