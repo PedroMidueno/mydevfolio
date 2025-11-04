@@ -13,12 +13,20 @@ interface IExperienceItem {
 
 const props = defineProps<IExperienceItem>()
 const emit = defineEmits(['request-update', 'update-records'])
+const isLoading = ref(false)
 
 const onDeleteExperience = async () => {
-  await $fetch(`/api/user/experience/${props.id}`, {
-    method: 'DELETE'
-  })
-  emit('update-records')
+  isLoading.value = true
+  try {
+    await $fetch(`/api/user/experience/${props.id}`, {
+      method: 'DELETE'
+    })
+    emit('update-records')
+  } catch (error) {
+    fireErrorToast('Ocurrió un error al eliminar la experiencia')
+  } finally {
+    isLoading.value = false
+  }
 }
 
 const confirmDeleteExperience = () => {
@@ -67,10 +75,15 @@ const confirmDeleteExperience = () => {
 
 
     <div class="flex gap-2 mt-4 justify-end">
-      <u-button variant="outline" color="error" @click="confirmDeleteExperience">
+      <u-button
+        variant="outline"
+        color="error"
+        :loading="isLoading"
+        @click="confirmDeleteExperience"
+      >
         Eliminar
       </u-button>
-      <u-button @click="emit('request-update', props)">
+      <u-button :disabled="isLoading" @click="emit('request-update', props)">
         Editar
       </u-button>
     </div>

@@ -7,6 +7,7 @@ const requiredMessage = 'Este campo es obligatorio'
 const form = useTemplateRef('form')
 const showDialog = ref<boolean>(false)
 const updating = ref<boolean>(false)
+const isLoading = ref(false)
 const recordToUpdateId = ref<number | null>(null)
 
 const schema = z.object({
@@ -47,6 +48,7 @@ const state = reactive<IForm>({
 })
 
 const onSubmit = async (event: FormSubmitEvent<Schema>) => {
+  isLoading.value = true
   try {
     await $fetch(`${updating.value ? `/api/user/experience/${recordToUpdateId.value}` : '/api/user/experience'}`, {
       method: `${updating.value ? 'put' : 'post'}`,
@@ -56,6 +58,8 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
     close()
   } catch (error) {
     fireErrorToast(`Ocurrió un error al ${updating.value ? 'actualizar' : 'crear'} este elemento`)
+  } finally {
+    isLoading.value = false
   }
 }
 
@@ -185,11 +189,12 @@ defineExpose({ open })
           <u-button
             variant="outline"
             color="error"
+            :disabled="isLoading"
             @click="close"
           >
             Cancelar
           </u-button>
-          <u-button type="submit">
+          <u-button type="submit" :loading="isLoading">
             Guardar
           </u-button>
         </div>

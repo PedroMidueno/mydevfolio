@@ -3,7 +3,7 @@ import type { DialogsExperienceForm } from '#components'
 
 const experienceForm = ref<InstanceType<typeof DialogsExperienceForm>>()
 
-const { data: userExperiences, refresh } = await useFetch('/api/user/experience', {
+const { data: userExperiences, refresh, pending } = await useFetch('/api/user/experience', {
   method: 'get'
 })
 
@@ -26,7 +26,7 @@ interface IExperienceItem {
     </h2>
 
     <div class="w-full flex flex-col gap-4 items-start">
-      <u-button @click="experienceForm?.open()">
+      <u-button :loading="pending" @click="experienceForm?.open()">
         Agregar experiencia laboral
       </u-button>
 
