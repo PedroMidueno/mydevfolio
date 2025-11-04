@@ -1,7 +1,14 @@
 <script setup lang="ts">
+const MIMETypesMap = {
+  'image/jpeg': 'jpg, jpeg',
+  'image/png': 'png',
+  'image/webp': 'webp',
+  'application/pdf': 'pdf'
+} as const
+
 const props = defineProps<{
   file?: File | null
-  accept: string[]
+  accept: (keyof typeof MIMETypesMap)[]
 }>()
 
 const emit = defineEmits<{
@@ -27,11 +34,11 @@ const validatePickedFile = (file: File | null) => {
   }
 
   const validMIMETypes = props.accept
-  if (!validMIMETypes?.includes(file.type)) {
+  if (!validMIMETypes?.includes(file.type as any)) {
     clearFilePicker()
     return {
       isValidFile: false,
-      errorMessage: 'Formatos aceptados: jpg, jpeg, png, webp'
+      errorMessage: 'Formatos aceptados: ' + props.accept.map(a => MIMETypesMap[a]).join(', ')
     }
   }
 
