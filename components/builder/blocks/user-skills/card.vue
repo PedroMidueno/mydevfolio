@@ -4,12 +4,14 @@ interface Props {
   name: string
   logo: string
 }
+const isLoading = ref(false)
 const props = defineProps<Props>()
 const emit = defineEmits<{
   (e: 'refresh-list'): void
 }>()
 
 const onDeleteTechSkill = async () => {
+  isLoading.value = true
   try {
     await $fetch(`/api/user/tech-skills/${props.techKey}`, {
       method: 'DELETE'
@@ -18,6 +20,8 @@ const onDeleteTechSkill = async () => {
     fireSuccessToast('Tecnología removida')
   } catch (error) {
     fireErrorToast('Ocurrió un error al remover la tecnología')
+  } finally {
+    isLoading.value = false
   }
 }
 </script>
@@ -30,6 +34,7 @@ const onDeleteTechSkill = async () => {
         icon="fa6-solid:xmark"
         class="rounded-full absolute -top-4 -right-4"
         color="error"
+        :loading="isLoading"
         @click="onDeleteTechSkill"
       />
     </u-tooltip>

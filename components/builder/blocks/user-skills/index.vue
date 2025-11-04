@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import type { TechSkillKey } from '@/prisma/seeds/catalogs/tech-skills'
 
-const { data: userSkills, error, refresh } = await useFetch('/api/user/tech-skills')
+const { data: userSkills, error, refresh, pending } = await useFetch('/api/user/tech-skills')
 if (error.value) {
   fireErrorToast('Ocurrió un erro al recuperar el catálogo de tecnologías')
 }
 const { techSkillCat } = useTechSkillCat()
 const selectedTech = ref<TechSkillKey | undefined>(undefined)
 const isAddingTech = ref(false)
+const isLoading = ref(false)
 const availableTech = computed(() => {
   return techSkillCat.value?.filter(tech => {
     return !userSkills.value?.some(userSkill => userSkill.techKey === tech.techKey)
@@ -22,6 +23,7 @@ const availableTech = computed(() => {
 })
 
 const addTechSkill = async (skill: TechSkillKey) => {
+  isLoading.value = true
   try {
     await $fetch(`/api/user/tech-skills/${skill}`, {
       method: 'POST'
@@ -32,6 +34,8 @@ const addTechSkill = async (skill: TechSkillKey) => {
     selectedTech.value = undefined
   } catch (error) {
     fireErrorToast('Ocurrió un error al agregar la tecnología')
+  } finally {
+    isLoading.value = false
   }
 }
 
@@ -49,7 +53,7 @@ watch(selectedTech, async selected => {
     </h2>
 
     <div class="flex gap-2 items-center">
-      <u-button @click="isAddingTech = true">
+      <u-button :loading="pending || isLoading" @click="isAddingTech = true">
         Agregar
       </u-button>
       <u-input-menu
@@ -62,11 +66,14 @@ watch(selectedTech, async selected => {
         }"
         placeholder="Buscar"
         class="ml-2"
+        :loading="isLoading"
+        :disabled="isLoading"
       />
       <u-button
         v-if="isAddingTech"
         color="error"
         variant="outline"
+        :loading="isLoading"
         @click="isAddingTech = false"
       >
         Cancelar
