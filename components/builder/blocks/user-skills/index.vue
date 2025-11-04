@@ -73,12 +73,12 @@ watch(selectedTech, async selected => {
       </u-button>
     </div>
 
-    <div v-if="userSkills?.length && userSkills.length > 0" class="flex gap-8 mt-8">
+    <div v-if="userSkills && userSkills.length > 0" class="flex gap-8 mt-8">
       <builder-blocks-user-skills-card
         v-for="skill in userSkills"
         :key="skill.techKey"
         v-bind="{ ...skill }"
-        @refresh-list="refresh()"
+        @refresh-list="refresh"
       />
     </div>
     <span v-else class="text-gray-400">
