@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { z } from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
-import { MIMETypes } from '~/types'
 
 const isEditingData = ref<boolean>(false)
+const isLoading = ref(false)
 const { bucketPrefixUrl } = useRuntimeConfig().public
 const { data: userContact, refresh } = await useFetch('/api/user/contact', {
   method: 'get'
 })
-
+const filePickerRef = useTemplateRef<{ pickFile: () => void }>('filePickerRef')
 const schema = z.object({
   githubUser: z.string().optional(),
   linkedinUser: z.string().optional(),
@@ -28,6 +28,7 @@ const state = reactive<IForm>({
 })
 
 const onSubmit = async (event: FormSubmitEvent<Schema>) => {
+  isLoading.value = true
   try {
     await $fetch('/api/user/contact', {
       method: 'PUT',
@@ -38,19 +39,14 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
     fireSuccessToast('Información actualizada')
   } catch (error) {
     fireErrorToast('Ocurrió un error al actualizar las redes de contacto')
+  } finally {
+    isLoading.value = false
   }
 }
 
-const handleFilePickerChange = async (event: any) => {
-  const file = event.target?.files?.[0]
+const handleFilePickerChange = async (file: File | null) => {
   if (!file) return
-
-  if (file?.type !== MIMETypes.PDF) {
-    fireErrorToast('El archivo seleccionado debe ser formato PDF')
-    clearFilePicker()
-    return
-  }
-
+  isLoading.value = true
   try {
     const form = new FormData()
     form.append('file', file)
@@ -59,27 +55,12 @@ const handleFilePickerChange = async (event: any) => {
       body: form
     })
     await refresh()
-    clearFilePicker()
     fireSuccessToast('Currículum actualizado')
   } catch (error) {
     fireErrorToast('Ocurrió un error al actualizar el currículum')
+  } finally {
+    isLoading.value = false
   }
-}
-
-const pickFile = () => {
-  const fileInput = document.getElementById('filePicker')!
-  fileInput.click()
-}
-
-const clearFilePicker = () => {
-  const fileInput = document.getElementById('filePicker')!
-
-  const newInput = document.createElement('input')
-  newInput.type = 'file'
-  newInput.id = 'filePicker'
-  newInput.style = 'display: none;'
-  newInput.onchange = handleFilePickerChange
-  fileInput.parentNode?.replaceChild(newInput, fileInput)
 }
 
 const viewCurrentResume = () => {
@@ -93,16 +74,9 @@ watch(isEditingData, () => {
 })
 </script>
 
-
 <template>
   <section class="flex flex-col gap-2 px-4">
-    <input
-      id="filePicker"
-      type="file"
-      accept="application/pdf"
-      class="hidden"
-      @change="handleFilePickerChange"
-    />
+    <ui-file-picker ref="filePickerRef" :accept="['application/pdf']" @update:file="handleFilePickerChange" />
     <h2 class="text-xl font-semibold mb-2">
       Información y redes de contacto
     </h2>
@@ -137,15 +111,20 @@ watch(isEditingData, () => {
               <u-button
                 class="text-white w-12 place-content-center"
                 color="primary"
-                @click="pickFile"
-              >
-                <u-icon :name="userContact?.resumeFile ? 'fa6-solid:arrows-rotate' : 'fa6-solid:upload' " />
-              </u-button>
+                :icon="userContact?.resumeFile ? 'fa6-solid:arrows-rotate' : 'fa6-solid:upload' "
+                size="xs"
+                :loading="isLoading"
+                @click="filePickerRef?.pickFile()"
+              />
             </u-tooltip>
             <u-tooltip v-if="userContact?.resumeFile" text="Ver currículum cargado">
-              <u-button class="text-white w-12 place-content-center" @click="viewCurrentResume">
-                <u-icon name="fa-solid:eye" />
-              </u-button>
+              <u-button
+                class="text-white w-12 place-content-center"
+                icon="fa-solid:eye"
+                size="xs"
+                :loading="isLoading"
+                @click="viewCurrentResume"
+              />
             </u-tooltip>
           </div>
         </div>
@@ -224,7 +203,7 @@ watch(isEditingData, () => {
           >
             Cancelar
           </u-button>
-          <u-button v-if="isEditingData" type="submit">
+          <u-button v-if="isEditingData" type="submit" :loading="isLoading">
             Guardar
           </u-button>
           <u-button v-if="!isEditingData" @click="isEditingData = true">
