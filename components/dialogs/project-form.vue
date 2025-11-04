@@ -144,14 +144,10 @@ const onFileChange = (file: File | null) => {
 defineExpose({ open })
 
 // Tech Stack picker logic
-const { data } = await useFetch('/api/tech-cat', {
-  method: 'get'
-})
-const techCat = data.value ?? [] as TechStackItem[]
-
+const { techSkillCat } = useTechSkillCat()
 
 watch(selectedtech, () => {
-  remainingTech.value = techCat.filter(tech =>
+  remainingTech.value = techSkillCat.value.filter(tech =>
     !selectedtech.value?.some(selected => tech.techKey === selected.techKey)
   )
 }, { deep: true, immediate: true })
