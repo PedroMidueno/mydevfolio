@@ -10,23 +10,16 @@ export default defineEventHandler(async event => {
     })
   }
 
+  const certificationId = parseInt(event.context.params?.certificationId ?? '', 10)
+
   const { id: pageId } = await prisma.page.findUniqueOrThrow({
     where: { userId }
   })
 
-  return await prisma.userCertification.findMany({
+  await prisma.userCertification.delete({
     where: {
+      id: certificationId,
       pageId
-    },
-    orderBy: {
-      issuedDate: 'asc'
-    },
-    select: {
-      id: true,
-      title: true,
-      certificateIssuer: true,
-      issuedDate: true,
-      certificateUrl: true
     }
   })
 })

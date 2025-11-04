@@ -11,6 +11,8 @@ export default defineEventHandler(async event => {
     })
   }
 
+  const certificationId = parseInt(event.context.params?.certificationId ?? '', 10)
+
   const { id: pageId } = await prisma.page.findUniqueOrThrow({
     where: { userId }
   })
@@ -30,9 +32,12 @@ export default defineEventHandler(async event => {
 
   const { issuedDate, ...rest } = body
 
-  await prisma.userCertification.create({
+  await prisma.userCertification.update({
+    where: {
+      id: certificationId,
+      pageId
+    },
     data: {
-      pageId,
       issuedDate: new Date(issuedDate),
       ...rest
     }
