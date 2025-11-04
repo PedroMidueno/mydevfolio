@@ -6,11 +6,14 @@ import { LazyDialogsCropper } from '#components'
 const { bucketPrefixUrl } = useRuntimeConfig().public
 const form = useTemplateRef('form')
 const cropperDialog = ref<typeof LazyDialogsCropper>()
+const filePickerRef = useTemplateRef<{
+  pickFile: () => void
+}>('filePickerRef')
 const isEditingData = ref(false)
-const { data: userPage, refresh } = await useFetch('/api/user/page', {
+const { data: userPage, refresh, pending } = await useFetch('/api/user/page', {
   method: 'get'
 })
-
+const isLoading = ref(false)
 const userImageUrl = computed(() => {
   if (userPage.value?.userImageFileKey) {
     return `${bucketPrefixUrl}/${userPage.value?.userImageFileKey}`
@@ -42,6 +45,7 @@ const state = reactive<IForm>({
 })
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
+  isLoading.value = true
   try {
     await $fetch('/api/user/page', {
       method: 'PUT',
@@ -52,33 +56,18 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     isEditingData.value = false
   } catch (error) {
     fireErrorToast('Ocurrió un error al actualizar la información')
+  } finally {
+    isLoading.value = false
   }
 }
 
-const handleFileInputChange = (event: any) => {
-  const file = event.target.files[0]
-
+const handleFileInputChange = (file: File | null) => {
   if (!file) return
   cropperDialog.value?.open(file)
 }
 
-const clearInput = () => {
-  const fileInput = document.getElementById('fileInput')!
-
-  const newInput = document.createElement('input')
-  newInput.type = 'file'
-  newInput.id = 'fileInput'
-  newInput.style = 'display: none;'
-  newInput.onchange = handleFileInputChange
-  fileInput.parentNode?.replaceChild(newInput, fileInput)
-}
-
-const pickFile = () => {
-  const fileInput = document.getElementById('fileInput')!
-  fileInput.click()
-}
-
 const updateUserImage = async (file: File) => {
+  isLoading.value = true
   try {
     const form = new FormData()
     form.append('file', file)
@@ -90,6 +79,8 @@ const updateUserImage = async (file: File) => {
     await refresh()
   } catch (error) {
     fireErrorToast('Ocurrió un error al actualizar la imagen')
+  } finally {
+    isLoading.value = false
   }
 }
 
@@ -106,15 +97,8 @@ watch(isEditingData, value => {
 
 <template>
   <section class="flex flex-col gap-2 px-4">
-    <lazy-dialogs-cropper ref="cropperDialog" @clear="clearInput" @crop="updateUserImage" />
-    <input
-      id="fileInput"
-      accept="image/png, image/jpeg, image/webp"
-      type="file"
-      class="hidden"
-      @change="handleFileInputChange"
-    />
-
+    <lazy-dialogs-cropper ref="cropperDialog" @crop="updateUserImage" />
+    <ui-file-picker ref="filePickerRef" :accept="['image/jpeg', 'image/png', 'image/webp']" @update:file="handleFileInputChange" />
     <h2 class="text-xl font-semibold mb-2">
       Información general
     </h2>
@@ -124,7 +108,7 @@ watch(isEditingData, value => {
           <img class="h-full w-full rounded-full bg-gray-50" :src="userImageUrl" alt="User image" />
         </div>
         <span class="text-[10px] text-gray-300">Tamaño recomendado: 500x500px</span>
-        <u-button label="Actualizar imagen" @click="pickFile" />
+        <u-button label="Actualizar imagen" :loading="pending || isLoading" @click=" filePickerRef?.pickFile()" />
       </div>
       <u-form
         ref="form"
@@ -189,7 +173,7 @@ watch(isEditingData, value => {
           >
             Cancelar
           </u-button>
-          <u-button v-if="isEditingData" type="submit">
+          <u-button v-if="isEditingData" type="submit" :loading="pending || isLoading">
             Guardar
           </u-button>
         </div>
