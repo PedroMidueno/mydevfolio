@@ -120,7 +120,7 @@ watch(isEditingData, () => {
             <u-tooltip v-if="userContact?.resumeFile" text="Ver currículum cargado">
               <u-button
                 class="text-white w-12 place-content-center"
-                icon="fa-solid:eye"
+                icon="fa6-solid:eye"
                 size="xs"
                 :loading="isLoading"
                 @click="viewCurrentResume"
