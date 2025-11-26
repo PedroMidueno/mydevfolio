@@ -15,7 +15,7 @@ const { data: userEducation, refresh, pending } = await useFetch('/api/user/educ
 </script>
 
 <template>
-  <section class="flex flex-col gap-2 px-4">
+  <section id="formacion" class="custom-container flex flex-col gap-2 px-4">
     <lazy-dialogs-education-form ref="educationForm" @refresh-list="refresh" />
     <h2 class="text-xl font-semibold mb-2">
       Mi formación

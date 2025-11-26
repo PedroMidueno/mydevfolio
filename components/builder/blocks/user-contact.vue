@@ -75,7 +75,7 @@ watch(isEditingData, () => {
 </script>
 
 <template>
-  <section class="flex flex-col gap-2 px-4">
+  <section id="contacto" class="custom-container flex flex-col gap-2">
     <ui-file-picker ref="filePickerRef" :accept="['application/pdf']" @update:file="handleFilePickerChange" />
     <h2 class="text-xl font-semibold mb-2">
       Información y redes de contacto

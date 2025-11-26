@@ -6,7 +6,7 @@ const certificationForm = useTemplateRef<InstanceType<typeof LazyDialogsCertific
 </script>
 
 <template>
-  <section class="flex flex-col gap-2 px-4">
+  <section id="certificaciones" class="custom-container flex flex-col gap-2 px-4">
     <lazy-dialogs-certification-form ref="certificationForm" @refresh-list="refresh" />
     <h2 class="text-xl font-semibold mb-2">
       Mis certificaciones

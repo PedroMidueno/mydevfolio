@@ -9,7 +9,7 @@ const { data: userProjects, refresh, pending } = await useFetch('/api/user/proje
 </script>
 
 <template>
-  <section class="flex flex-col gap-2 px-4">
+  <section id="proyectos" class="custom-container flex flex-col gap-2 px-4">
     <lazy-dialogs-project-form ref="projectForm" @refresh-list="refresh" />
     <h2 class="text-xl font-semibold mb-2">
       Proyectos

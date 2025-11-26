@@ -96,7 +96,7 @@ watch(isEditingData, value => {
 </script>
 
 <template>
-  <section class="flex flex-col gap-2 px-4">
+  <section id="informacion-general" class="custom-container flex flex-col gap-2">
     <lazy-dialogs-cropper ref="cropperDialog" @crop="updateUserImage" />
     <ui-file-picker ref="filePickerRef" :accept="['image/jpeg', 'image/png', 'image/webp']" @update:file="handleFileInputChange" />
     <h2 class="text-xl font-semibold mb-2">
