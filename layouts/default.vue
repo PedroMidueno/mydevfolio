@@ -5,7 +5,7 @@ const route = useRoute()
 
 <template>
   <div class="min-h-screen">
-    <header class="h-16 items-center px-4 bg-blue-800 sticky top-0 z-10 rounded-sm">
+    <header class="h-16 items-center bg-blue-800 sticky top-0 z-10">
       <nav class="custom-container flex justify-between h-full items-center">
         <div>
           <u-link class="text-xl font-bold text-gray-50" to="/">
@@ -56,5 +56,7 @@ const route = useRoute()
     <main>
       <slot />
     </main>
+
+    <ui-dashboard-footer />
   </div>
 </template>
