@@ -13,13 +13,13 @@ const route = useRoute()
           </u-link>
         </div>
         <div>
-          <SignedOut>
+          <signed-out>
             <u-link v-if="!hideSignInButton(route)" class="text-gray-50" to="/sign-in">
               Iniciar sesión
             </u-link>
-          </SignedOut>
+          </signed-out>
 
-          <SignedIn>
+          <signed-in>
             <div class="flex gap-8 items-center h-full">
               <div class="flex gap-4 text-sm">
                 <u-link class="text-white hover:underline hover:text-white" to="#informacion-general">
@@ -48,7 +48,7 @@ const route = useRoute()
                 <user-button show-name />
               </div>
             </div>
-          </SignedIn>
+          </signed-in>
         </div>
       </nav>
     </header>
