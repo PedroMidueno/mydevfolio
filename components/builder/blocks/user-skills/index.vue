@@ -47,7 +47,7 @@ watch(selectedTech, async selected => {
 </script>
 
 <template>
-  <section id="stack-tecnologico" class="custom-container flex flex-col gap-2 px-4">
+  <section id="stack-tecnologico" class="custom-container flex flex-col gap-2">
     <h2 class="text-xl font-semibold mb-2">
       Mi stack tecnológico
     </h2>

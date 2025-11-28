@@ -19,7 +19,7 @@ interface IExperienceItem {
 </script>
 
 <template>
-  <section id="experiencia-laboral" class="custom-container flex flex-col gap-2 px-4">
+  <section id="experiencia-laboral" class="custom-container flex flex-col gap-2">
     <dialogs-experience-form ref="experienceForm" @update-records="refresh" />
     <h2 class="text-xl font-semibold mb-2">
       Experiencia laboral
