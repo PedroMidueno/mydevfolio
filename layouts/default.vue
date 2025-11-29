@@ -4,7 +4,7 @@ const route = useRoute()
 </script>
 
 <template>
-  <div class="min-h-screen">
+  <div class="min-h-screen grid grid-rows-[auto_1fr_auto]">
     <header class="h-16 items-center bg-blue-800 sticky top-0 z-10">
       <nav class="custom-container flex justify-between h-full items-center">
         <div>
