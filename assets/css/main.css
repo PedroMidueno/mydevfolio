@@ -27,3 +27,16 @@ body {
 @utility custom-container {
   @apply w-full max-w-7xl mx-auto scroll-m-16;
 }
+
+@utility animate-rotate {
+  animation-name: rotate;
+  animation-timing-function: linear;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
