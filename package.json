@@ -12,10 +12,10 @@
     "lint:fix": "eslint . --fix",
     "db:seed": "npx -y tsx ./prisma/seeds",
     "db:migrate": "npx -y prisma migrate dev",
-    "db:migrate:deploy": "npx -y prisma migrate deploy",
-    "prisma:generate": "npx -y prisma generate",
-    "prisma:format": "npx -y prisma format",
-    "db:reset": "npx -y prisma migrate reset"
+    "db:migrate:deploy": "prisma migrate deploy",
+    "prisma:generate": "prisma generate",
+    "prisma:format": "prisma format",
+    "db:reset": "prisma migrate reset"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.812.0",
@@ -34,6 +34,7 @@
     "@iconify-json/fa6-solid": "^1.2.3",
     "@nuxt/eslint": "^1.3.0",
     "eslint": "^9.26.0",
+    "prisma": "^6.19.0",
     "typescript": "^5.9.2"
   }
 }
