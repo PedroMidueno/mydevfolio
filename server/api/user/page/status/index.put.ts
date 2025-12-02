@@ -26,7 +26,8 @@ export default defineEventHandler(async event => {
       userId
     },
     data: {
-      isPublished: body.status
+      isPublished: body.status,
+      publishDate: body.status ? new Date() : undefined
     }
   })
 })
