@@ -26,7 +26,7 @@ const schema = z.object({
   firstName: z.string().min(1, 'Este campo es obligatorio'),
   lastName: z.string().min(1, 'Este campo es obligatorio'),
   userJobPositionName: z.string().optional(),
-  userDescription: z.string().optional()
+  userDescription: z.string().max(500, 'Máximo 500 caracteres').optional()
 })
 
 type Schema = z.output<typeof schema>
@@ -140,7 +140,7 @@ watch(isEditingData, value => {
             <u-input
               v-model="state.userJobPositionName"
               class="w-full"
-              placeholder="Desarrollador Web Full Stack"
+              placeholder="Ej. Desarrollador Web Full Stack"
               :disabled="!isEditingData"
             />
           </u-form-field>
@@ -149,12 +149,12 @@ watch(isEditingData, value => {
           class="w-full"
           label="Perfil profesional"
           name="userDescription"
-          :hint="isEditingData ? `${state.userDescription?.length} / 1000` : undefined"
+          :hint="isEditingData ? `${state.userDescription?.length} / 500` : undefined"
         >
           <u-textarea
             v-model="state.userDescription"
             class="w-full"
-            maxlength="1000"
+            maxlength="500"
             placeholder="Soy un asombroso desarrollador web full stack con tremendas habilidades en..."
             :disabled="!isEditingData"
             :style="{ resize: 'none' }"
