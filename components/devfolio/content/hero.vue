@@ -50,13 +50,13 @@ const downloadCv = async () => {
     a.remove()
     URL.revokeObjectURL(url)
   } catch (error) {
-    console.error('Error descargando el archivo:', error)
+    fireErrorToast('Error', 'Ocurrió un error al descargar el archivo')
   }
 }
 </script>
 
 <template>
-  <section id="home" class="flex flex-col w-full items-center pt-12 gap-2 sm:gap-4 min-h-[100dvh] sm:pt-24 lg:justify-center lg:pt-0">
+  <section id="home" class="flex flex-col w-full items-center justify-center gap-2 sm:gap-4 min-h-[100dvh] sm:pt-24">
     <motion.div
       class="flex flex-col items-center sm:gap-1"
       :initial="{
