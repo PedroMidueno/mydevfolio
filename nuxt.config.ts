@@ -16,7 +16,7 @@ export default defineNuxtConfig({
       bucketPrefixUrl: process.env.R2_BUCKET_PUBLIC_URL
     }
   },
-  modules: ['@nuxt/eslint', '@nuxt/ui', '@prisma/nuxt', '@clerk/nuxt'],
+  modules: ['@nuxt/eslint', '@nuxt/ui', '@prisma/nuxt', '@clerk/nuxt', 'motion-v/nuxt'],
   vite: {
     resolve: {
       alias: {

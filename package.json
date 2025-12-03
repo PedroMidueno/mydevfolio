@@ -23,6 +23,7 @@
     "@clerk/themes": "^2.2.43",
     "@nuxt/ui": "^3.1.1",
     "@prisma/nuxt": "^0.3.0",
+    "motion-v": "^1.7.4",
     "nuxt": "^3.17.2",
     "vue": "^3.5.13",
     "vue-advanced-cropper": "^2.8.9",
