@@ -28,6 +28,10 @@ body {
   @apply w-full max-w-7xl mx-auto scroll-m-16;
 }
 
+@utility devfolio-container {
+  @apply w-full max-w-5xl mx-auto px-4 sm:px-8;
+}
+
 @utility animate-rotate {
   animation-name: rotate;
   animation-timing-function: linear;
