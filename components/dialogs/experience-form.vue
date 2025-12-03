@@ -70,8 +70,8 @@ const open = (isUpdate = false, dataToUpdate: IForm & { id: number | undefined }
     state.jobTitle = dataToUpdate?.jobTitle
     state.company = dataToUpdate?.company
     state.jobDescription = dataToUpdate?.jobDescription
-    state.startDate = parseDateString(dataToUpdate?.startDate as string)
-    state.endDate = dataToUpdate?.endDate ? parseDateString(dataToUpdate.endDate) : undefined
+    state.startDate = extractDateString(dataToUpdate?.startDate as string)
+    state.endDate = dataToUpdate?.endDate ? extractDateString(dataToUpdate.endDate) : undefined
     state.isCurrentJob = dataToUpdate?.isCurrentJob as boolean
   }
   showDialog.value = true

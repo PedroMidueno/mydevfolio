@@ -77,8 +77,8 @@ const open = (isUpdate = false, dataToUpdate: Schema & { id: number } | null = n
     idToUpdate = dataToUpdate!.id
     state.title = dataToUpdate!.title
     state.school = dataToUpdate!.school
-    state.startDate = parseDateString(dataToUpdate!.startDate)
-    state.endDate = dataToUpdate?.endDate ? parseDateString(dataToUpdate.endDate) : undefined
+    state.startDate = extractDateString(dataToUpdate!.startDate)
+    state.endDate = dataToUpdate?.endDate ? extractDateString(dataToUpdate.endDate) : undefined
     state.isCurrentSchool = dataToUpdate!.isCurrentSchool
   }
   showDialog.value = true

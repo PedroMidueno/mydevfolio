@@ -13,13 +13,13 @@ const MONTHS = [
   'Diciembre'
 ]
 
-export const parseDateString = (dateString: string) => {
+export const extractDateString = (dateString: string) => {
   const [date] = dateString.split('T')
 
   return date
 }
 
-export const parseDateTimeString = (dateString: string) => {
+export const parseDateToMonthAndYear = (dateString: string) => {
   const [date] = dateString.split('T')
   const [year, month] = date.split('-')
 

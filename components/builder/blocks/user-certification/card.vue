@@ -63,7 +63,7 @@ const confirmDeleteCertification = () => {
       {{ props.certificateIssuer }}
     </div>
     <div class="flex justify-between items-center">
-      {{ parseDateTimeString(props.issuedDate) }}
+      {{ parseDateToMonthAndYear(props.issuedDate) }}
       <div>
         <u-button :to="props.certificateUrl" target="_blank">
           Ver certificado

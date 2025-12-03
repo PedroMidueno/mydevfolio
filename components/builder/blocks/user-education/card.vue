@@ -65,7 +65,7 @@ const confirmDeleteEducation = () => {
       {{ props.school }}
     </div>
     <div class="text-md mb-4">
-      {{ parseDateTimeString(props.startDate) }} - {{ props.isCurrentSchool? 'actualidad' : parseDateTimeString(props.endDate!) }}
+      {{ parseDateToMonthAndYear(props.startDate) }} - {{ props.isCurrentSchool? 'actualidad' : parseDateToMonthAndYear(props.endDate!) }}
     </div>
 
     <hr class="w-full border border-gray-600" />

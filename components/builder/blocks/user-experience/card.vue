@@ -62,7 +62,7 @@ const confirmDeleteExperience = () => {
       {{ props.company }}
     </div>
     <div class="text-md mb-4">
-      {{ parseDateTimeString(props.startDate!) }} - {{ props.isCurrentJob? 'actualidad' : parseDateTimeString(props.endDate as string) }}
+      {{ parseDateToMonthAndYear(props.startDate!) }} - {{ props.isCurrentJob? 'actualidad' : parseDateToMonthAndYear(props.endDate as string) }}
     </div>
     <div class="text-sm text-gray-400 mb-1">
       Actividades principales:

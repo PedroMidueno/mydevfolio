@@ -64,7 +64,7 @@ const open = (isUpdate: boolean = false, dataToUpdate?: Schema & { id: number })
   if (isUpdate && dataToUpdate) {
     state.title = dataToUpdate.title
     state.certificateIssuer = dataToUpdate.certificateIssuer
-    state.issuedDate = parseDateString(dataToUpdate.issuedDate)
+    state.issuedDate = extractDateString(dataToUpdate.issuedDate)
     state.certificateUrl = dataToUpdate.certificateUrl
     idToUpdate = dataToUpdate.id
   }
