@@ -32,9 +32,9 @@ const jobDetailsRef = useTemplateRef('jobDetailsModal')
     }"
     :in-view-options="{ once: true }"
   >
-    <div class="text-lg md:text-xl font-semibold">
+    <h3 class="text-lg md:text-xl font-semibold">
       {{ props.jobTitle }}
-    </div>
+    </h3>
     <div class="text-xs md:text-sm text-gray-400">
       {{ props.company }}
     </div>

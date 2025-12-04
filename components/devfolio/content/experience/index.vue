@@ -15,16 +15,13 @@ const props = defineProps<Props>()
 
 <template>
   <section
-    v-if="props.experiences.length > 0"
     class="flex flex-col gap-8 items-center w-full"
   >
-    <h2 class="text-2xl font-semibold md:font-bold">
-      Experiencia
-    </h2>
+    <ui-devfolio-section-title text="Experiencia" />
 
     <div
       :class="[
-        'grid grid-cols-1 w-full gap-4',
+        'grid grid-cols-1 w-full gap-4 justify-items-center md:justify-items-normal',
         props.experiences.length > 1 ? 'md:grid-cols-2' : 'md:grid-cols-1 md:justify-items-center'
       ]"
     >
