@@ -43,7 +43,7 @@ onBeforeUnmount(() => {
 <template>
   <p
     ref="description-paragraph"
-    class="text-balance text-sm md:text-base relative whitespace-pre-line line-clamp-5"
+    class="text-balance text-sm md:text-base relative whitespace-pre-line line-clamp-5 md:min-h-[120px]"
   >
     {{ props.text }}
     <u-button
