@@ -5,7 +5,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { data: devfolioData, error } = useFetch(`/api/devfolio/${props.code}`)
+const { data: devfolioData, error } = await useFetch(`/api/devfolio/${props.code}`)
 </script>
 
 <template>
@@ -17,7 +17,7 @@ const { data: devfolioData, error } = useFetch(`/api/devfolio/${props.code}`)
     <main class="devfolio-container flex flex-col items-center gap-8 xl:border-x border-slate-800">
       <devfolio-content-hero v-bind="devfolioData!.heroInfo" />
 
-      <devfolio-content-experience />
+      <devfolio-content-experience :experiences="devfolioData?.jobExperiences ?? []" />
 
       <devfolio-content-projects />
 
