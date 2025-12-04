@@ -9,7 +9,7 @@ const { data: devfolioData, error } = await useFetch(`/api/devfolio/${props.code
 </script>
 
 <template>
-  <section class="w-full min-h-[100dvh] bg-gray-950 text-white flex flex-col items-center overflow-hidden relative">
+  <section class="w-full min-h-dvh bg-gray-950 text-white flex flex-col items-center overflow-hidden relative">
     <devfolio-seo-tags />
 
     <devfolio-navbar />
@@ -17,9 +17,15 @@ const { data: devfolioData, error } = await useFetch(`/api/devfolio/${props.code
     <main class="devfolio-container flex flex-col items-center gap-8 xl:border-x border-slate-800">
       <devfolio-content-hero v-bind="devfolioData!.heroInfo" />
 
-      <devfolio-content-experience :experiences="devfolioData?.jobExperiences ?? []" />
+      <devfolio-content-experience
+        v-if="devfolioData?.jobExperiences && devfolioData.jobExperiences.length > 0"
+        :experiences="devfolioData.jobExperiences"
+      />
 
-      <devfolio-content-projects />
+      <devfolio-content-projects
+        v-if="devfolioData?.projects && devfolioData.projects.length > 0"
+        :projects="devfolioData.projects"
+      />
 
       <devfolio-content-skills />
 
