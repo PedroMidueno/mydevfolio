@@ -52,6 +52,9 @@ export default defineEventHandler(async event => {
           startDate: true,
           endDate: true,
           isCurrentJob: true
+        },
+        orderBy: {
+          startDate: 'desc'
         }
       },
 
@@ -77,6 +80,9 @@ export default defineEventHandler(async event => {
               fileKey: true
             }
           }
+        },
+        orderBy: {
+          createdAt: 'desc'
         }
       },
 
@@ -100,6 +106,9 @@ export default defineEventHandler(async event => {
           startDate: true,
           endDate: true,
           isCurrentSchool: true
+        },
+        orderBy: {
+          startDate: 'desc'
         }
       },
 
@@ -109,6 +118,9 @@ export default defineEventHandler(async event => {
           certificateIssuer: true,
           certificateUrl: true,
           issuedDate: true
+        },
+        orderBy: {
+          issuedDate: 'desc'
         }
       }
     }
@@ -154,7 +166,8 @@ export default defineEventHandler(async event => {
       description: p.description,
       techStack: p.techSkills.map(({ techSkill }) => ({ logo: techSkill.logo, name: techSkill.name })),
       repositoryUrl: p.repositoryUrl,
-      deployUrl: p.deployUrl
+      deployUrl: p.deployUrl,
+      image: p.imageResource ? `${bucketPrefixUrl}/${p.imageResource.fileKey}` : ''
     })),
     techSkills: skills.map(({ techSkill }) => ({ logo: techSkill.logo, name: techSkill.name })),
     educations,
