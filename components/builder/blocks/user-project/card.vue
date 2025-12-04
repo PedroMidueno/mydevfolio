@@ -51,7 +51,7 @@ const confirmDeleteProject = () => {
 </script>
 
 <template>
-  <article class="border text-gray-100 p-4 rounded-md bg-[var(--ui-bg)] border-gray-600 flex flex-col gap-2 items-center">
+  <article class="border text-gray-100 p-4 rounded-md bg-[var(--ui-bg)] border-gray-600 flex flex-col gap-2 items-center max-w-[420px]">
     <div class="w-96 aspect-og-image rounded-sm overflow-clip border border-gray-600">
       <img
         :src="`${bucketPrefixUrl}/${props.imageKey}`"
