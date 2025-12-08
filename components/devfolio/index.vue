@@ -37,7 +37,10 @@ const { data: devfolioData, error } = await useFetch(`/api/devfolio/${props.code
         :educations="devfolioData.educations"
       />
 
-      <devfolio-content-certificates />
+      <devfolio-content-certificates
+        v-if="devfolioData?.certifications && devfolioData.certifications.length > 0"
+        :certifications="devfolioData.certifications"
+      />
     </main>
 
     <devfolio-footer />
