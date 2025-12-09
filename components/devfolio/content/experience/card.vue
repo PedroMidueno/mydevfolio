@@ -16,7 +16,7 @@ const jobDetailsRef = useTemplateRef('jobDetailsModal')
 
 <template>
   <motion.article
-    class="border border-gray-700 p-4 rounded-md md:last:odd:col-span-2 md:last:odd:justify-self-center md:last:odd:max-w-[calc(100%/2)]"
+    class="border border-gray-700 p-4 rounded-md md:last:odd:col-span-2 md:last:odd:justify-self-center md:last:odd:max-w-1/2"
     :initial="{
       opacity: 0,
       y: 30

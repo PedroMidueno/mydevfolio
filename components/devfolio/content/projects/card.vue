@@ -16,7 +16,7 @@ const projectDetailsRef = useTemplateRef('project-details')
 
 <template>
   <motion.article
-    class="rounded-md overflow-clip flex flex-col items-center md:last:odd:col-span-2 md:last:odd:justify-self-center md:last:odd:max-w-[calc(100%/2)]"
+    class="rounded-md overflow-clip flex flex-col items-center md:last:odd:col-span-2 md:last:odd:justify-self-center md:last:odd:max-w-1/2"
     :initial="{
       opacity: 0,
       filter: 'blur(10px)',
