@@ -14,7 +14,7 @@ const { data: devfolioData, error } = await useFetch(`/api/devfolio/${props.code
 
     <devfolio-navbar />
 
-    <main class="devfolio-container flex flex-col items-center gap-8 xl:border-x border-slate-800">
+    <main class="devfolio-container flex flex-col items-center gap-8 xl:border-x border-slate-800 [&_section]:scroll-m-4 [&_section]:sm:scroll-m-12">
       <devfolio-content-hero v-bind="devfolioData!.heroInfo" />
 
       <devfolio-content-experience

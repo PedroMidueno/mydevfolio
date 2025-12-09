@@ -12,7 +12,10 @@ const props = defineProps<Props>()
 </script>
 
 <template>
-  <section id="certifications" class="w-full flex flex-col gap-8 items-center py-8 mt-8">
+  <section
+    id="certificaciones"
+    class="w-full flex flex-col gap-8 items-center py-8 mt-8"
+  >
     <ui-devfolio-section-title text="Certificaciones" />
 
     <div

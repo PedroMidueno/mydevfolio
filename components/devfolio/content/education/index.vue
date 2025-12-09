@@ -14,7 +14,7 @@ const props = defineProps<Props>()
 
 <template>
   <section
-    id="education"
+    id="formacion"
     class="w-full flex flex-col gap-8 items-center py-8 mt-8"
   >
     <ui-devfolio-section-title text="Formación" />

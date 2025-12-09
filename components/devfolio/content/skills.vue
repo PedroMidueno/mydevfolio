@@ -35,7 +35,7 @@ const itemVariants: MotionProps['variants'] = {
 </script>
 
 <template>
-  <section id="tech-skils" class="w-full flex flex-col gap-8 items-center py-8 mt-8">
+  <section id="stack" class="w-full flex flex-col gap-8 items-center py-8 mt-8">
     <ui-devfolio-section-title text="Habilidades técnicas" />
 
     <Motion

@@ -15,7 +15,8 @@ const props = defineProps<Props>()
 
 <template>
   <section
-    class="flex flex-col gap-8 items-center w-full"
+    id="experiencia"
+    class="flex flex-col gap-8 items-center w-full !scroll-m-12 sm:!scroll-m-20"
   >
     <ui-devfolio-section-title text="Experiencia" />
 
