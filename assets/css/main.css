@@ -7,8 +7,23 @@
 }
 
 :root {
+  --ui-primary: #00a6fb;
   --ui-text: #FAFAFF;
-  --ui-secondary: red;
+  --ui-secondary: #fb8500;
+}
+
+@theme {
+  --color-blue-50: #eff9ff;
+  --color-blue-100: #def1ff;
+  --color-blue-200: #b6e5ff;
+  --color-blue-300: #75d2ff;
+  --color-blue-400: #2cbcff;
+  --color-blue-500: #00a6fb;
+  --color-blue-600: #0082d4;
+  --color-blue-700: #0067ab;
+  --color-blue-800: #00578d;
+  --color-blue-900: #064974;
+  --color-blue-950: #042e4d;
 }
 
 .dark {
