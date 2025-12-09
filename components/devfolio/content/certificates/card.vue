@@ -36,7 +36,7 @@ const props = defineProps<Props>()
         target="_blank"
       >
         <span>{{ props.title }}</span>
-        <u-icon name="fa6-solid:arrow-up-right-from-square" class="w-3 h-3 text-primary ml-2" />
+        <u-icon name="fa6-solid:arrow-up-right-from-square" class="w-3 h-3 text-blue-400 ml-2" />
       </a>
     </h3>
 

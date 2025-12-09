@@ -49,7 +49,7 @@ onBeforeUnmount(() => {
     <u-button
       v-if="showSeeMoreButton"
       variant="link"
-      class="absolute !py-0 flex items-end right-0 bottom-0 pl-4 text-right bg-linear-to-l from-gray-950 from-80% to-transparent"
+      class="absolute text-secondary !py-0 flex items-end right-0 bottom-0 pl-4 text-right bg-linear-to-l from-gray-950 from-80% to-transparent"
       @click="emit('request-show-more')"
     >
       Ver más

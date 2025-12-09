@@ -10,7 +10,7 @@ const props = defineProps<Props>()
 
 <template>
   <motion.h2
-    class="text-2xl font-semibold md:font-bold"
+    class="text-2xl font-semibold md:font-bold text-blue-100"
     :initial="{
       scale: 0.9,
       filter: 'blur(5px)',
