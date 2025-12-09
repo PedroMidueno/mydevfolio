@@ -14,7 +14,7 @@ const props = defineProps<Props>()
 
 <template>
   <motion.article
-    class="w-full flex flex-col gap-1 items-center max-w-lg"
+    class="w-full flex flex-col gap-1 items-center md:last:odd:col-span-2 md:last:odd:justify-self-center md:last:odd:max-w-[calc(100%/2)]"
     :initial="{
       opacity: 0,
       filter: 'blur(5px)'

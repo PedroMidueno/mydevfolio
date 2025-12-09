@@ -20,10 +20,7 @@ const props = defineProps<Props>()
     <ui-devfolio-section-title text="Formación" />
 
     <div
-      :class="[
-        'grid grid-cols-1 w-full gap-8 md:gap-4 justify-items-center md:justify-items-normal',
-        props.educations.length > 1 ? 'md:grid-cols-2' : 'md:grid-cols-1 md:justify-items-center'
-      ]"
+      class="grid grid-cols-1 w-full gap-8 md:grid-cols-2 justify-items-center"
     >
       <devfolio-content-education-card
         v-for="education in props.educations"
