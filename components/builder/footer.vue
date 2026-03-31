@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-[var(--ui-bg)] border-t border-gray-500">
+  <footer class="bg-[var(--ui-bg)] border-t border-gray-500 w-full">
     <div class="custom-container grid grid-cols-3 py-4 items-center">
       <h3 class="text-xl font-bold">
         My Devfolio Logo

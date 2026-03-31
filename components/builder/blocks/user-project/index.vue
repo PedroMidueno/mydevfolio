@@ -20,7 +20,7 @@ const { data: userProjects, refresh, pending } = await useFetch('/api/user/proje
         Agregar proyecto
       </u-button>
 
-      <div class="flex flex-wrap w-full gap-8">
+      <div class="flex flex-wrap w-full gap-2">
         <template v-if="(userProjects ?? []).length > 0">
           <builder-blocks-user-project-card
             v-for="userProject of userProjects"
