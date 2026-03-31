@@ -39,11 +39,11 @@ body {
   background: linear-gradient(0deg, #343a40 0%, #131515 100%);
 }
 
-@utility custom-container {
-  @apply w-full max-w-7xl mx-auto scroll-m-16;
+.custom-container {
+  @apply w-full max-w-7xl mx-auto px-4 min-[1312px]:px-0 scroll-m-16 overflow-x-hidden;
 }
 
-@utility devfolio-container {
+.devfolio-container {
   @apply w-full max-w-5xl mx-auto px-4 sm:px-8;
 }
 
