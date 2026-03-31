@@ -11,7 +11,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "db:seed": "npx -y tsx ./prisma/seeds",
-    "db:migrate": "npx -y prisma migrate dev",
+    "db:migrate": "prisma migrate dev",
     "db:migrate:deploy": "prisma migrate deploy",
     "prisma:generate": "prisma generate",
     "prisma:format": "prisma format",
