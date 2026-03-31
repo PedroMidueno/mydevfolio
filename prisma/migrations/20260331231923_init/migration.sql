@@ -122,7 +122,7 @@ CREATE TABLE "user_education" (
 );
 
 -- CreateTable
-CREATE TABLE "UserCertification" (
+CREATE TABLE "user_certification" (
     "id" SERIAL NOT NULL,
     "title" VARCHAR(150) NOT NULL,
     "certificate_issuer" VARCHAR(150) NOT NULL,
@@ -130,7 +130,7 @@ CREATE TABLE "UserCertification" (
     "certificate_url" VARCHAR(300) NOT NULL,
     "page_id" INTEGER NOT NULL,
 
-    CONSTRAINT "UserCertification_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "user_certification_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -221,4 +221,4 @@ ALTER TABLE "tech_skills_on_projects" ADD CONSTRAINT "tech_skills_on_projects_pr
 ALTER TABLE "user_education" ADD CONSTRAINT "user_education_page_id_fkey" FOREIGN KEY ("page_id") REFERENCES "page"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "UserCertification" ADD CONSTRAINT "UserCertification_page_id_fkey" FOREIGN KEY ("page_id") REFERENCES "page"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "user_certification" ADD CONSTRAINT "user_certification_page_id_fkey" FOREIGN KEY ("page_id") REFERENCES "page"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

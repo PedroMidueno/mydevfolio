@@ -172,4 +172,6 @@ model UserCertification {
   certificateUrl    String   @map("certificate_url") @db.VarChar(300)
   pageId            Int      @map("page_id")
   page              Page     @relation(fields: [pageId], references: [id])
+
+  @@map("user_certification")
 }
