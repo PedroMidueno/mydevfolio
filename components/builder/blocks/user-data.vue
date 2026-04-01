@@ -99,25 +99,26 @@ watch(isEditingData, value => {
   <section id="informacion-general" class="custom-container flex flex-col gap-2">
     <lazy-dialogs-cropper ref="cropperDialog" @crop="updateUserImage" />
     <ui-file-picker ref="filePickerRef" :accept="['image/jpeg', 'image/png', 'image/webp']" @update:file="handleFileInputChange" />
-    <h2 class="text-xl font-semibold mb-2">
+    <h2 class="text-lg md:text-xl font-semibold mb-2">
       Información general
     </h2>
-    <div class="flex items-center gap-4 h-68">
-      <div class="h-full flex flex-col items-center justify-between">
+    <div class="flex flex-col md:flex-row items-center gap-2 md:gap-4 lg:gap-8">
+      <div class="w-full md:w-auto md:h-full md:justify-center flex flex-col gap-2 md:gap-4 items-center justify-between">
         <div class="h-52 w-52">
           <img class="h-full w-full rounded-full bg-gray-50" :src="userImageUrl" alt="User image" />
         </div>
         <span class="text-[10px] text-gray-300">Tamaño recomendado: 500x500px</span>
         <u-button label="Actualizar imagen" :loading="pending || isLoading" @click=" filePickerRef?.pickFile()" />
       </div>
+
       <u-form
         ref="form"
         :schema="schema"
         :state="state"
-        class="flex flex-col justify-between items-end grow h-full"
+        class="flex flex-col md:justify-between items-end grow w-full md:w-auto"
         @submit="onSubmit"
       >
-        <div class="flex gap-2 w-full">
+        <div class="flex flex-col gap-1 md:gap-2 w-full">
           <u-form-field class="grow" label="Nombre(s)" name="firstName">
             <u-input
               v-model="state.firstName"
@@ -146,7 +147,7 @@ watch(isEditingData, value => {
           </u-form-field>
         </div>
         <u-form-field
-          class="w-full"
+          class="w-full h-[98px]"
           label="Perfil profesional"
           name="userDescription"
           :hint="isEditingData ? `${state.userDescription?.length} / 500` : undefined"
@@ -161,7 +162,7 @@ watch(isEditingData, value => {
           />
         </u-form-field>
 
-        <div class="flex gap-4">
+        <div class="flex gap-4 mt-2">
           <u-button v-if="!isEditingData" @click="isEditingData = true">
             Actualizar información
           </u-button>
