@@ -82,7 +82,7 @@ const copyPortfolioUrl = () => {
           </u-button>
         </u-tooltip>
         <u-chip standalone inset color="warning" />
-        <span class="block text text-yellow-400">No publicado</span>
+        <span class="block text text-yellow-400 md:w-24">No publicado</span>
       </template>
     </div>
   </header>
