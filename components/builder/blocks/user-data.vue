@@ -2,6 +2,7 @@
 import { z } from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
 import { LazyDialogsCropper } from '#components'
+import userDefaultImg from 'assets/img/user_default_img.png'
 
 const { bucketPrefixUrl } = useRuntimeConfig().public
 const form = useTemplateRef('form')
@@ -18,7 +19,7 @@ const userImageUrl = computed(() => {
   if (userPage.value?.userImageFileKey) {
     return `${bucketPrefixUrl}/${userPage.value?.userImageFileKey}`
   } else {
-    return 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png'
+    return userDefaultImg
   }
 })
 
