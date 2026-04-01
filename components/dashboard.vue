@@ -14,7 +14,6 @@ type Schema = z.output<typeof schema>
 
 const { user } = useUser()
 
-const creatingPage = ref(false)
 interface State {
   firstName: string | undefined
   lastName: string | undefined
@@ -59,17 +58,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         <p class="text-xl font-light">
           Comienza a construir tu Devfolio
         </p>
-        <template v-if="!creatingPage">
-          <u-button
-            variant="outline"
-            class="rounded-lg p-8 h-32 flex flex-col items-center gap-2 cursor-pointer w-80"
-            @click="creatingPage = true"
-          >
-            <span class="text-blue-300 text-xl font-bold">Crear Devfolio</span>
-            <u-icon class="text-4xl" name="fa6-regular:square-plus" />
-          </u-button>
-        </template>
-        <div v-if="creatingPage" class="h-32 flex items-start flex-col gap-2 w-fit">
+        <div class="h-32 flex items-start flex-col gap-2 w-fit">
           <u-form
             :schema="schema"
             :state="state"
