@@ -104,7 +104,7 @@ watch(isEditingData, value => {
       Información general
     </h2>
     <div class="flex flex-col md:flex-row items-center gap-2 md:gap-4 lg:gap-8">
-      <div class="w-full md:w-auto md:h-full md:justify-center flex flex-col gap-2 md:gap-4 items-center justify-between">
+      <div class="w-full md:w-auto md:h-full md:justify-center flex flex-col gap-2 items-center justify-between">
         <div class="h-52 w-52">
           <img class="h-full w-full rounded-full bg-gray-50" :src="userImageUrl" alt="User image" />
         </div>
@@ -116,10 +116,10 @@ watch(isEditingData, value => {
         ref="form"
         :schema="schema"
         :state="state"
-        class="flex flex-col md:justify-between items-end grow w-full md:w-auto"
+        class="flex flex-col md:justify-between items-end grow w-full md:w-auto md:h-full"
         @submit="onSubmit"
       >
-        <div class="flex flex-col gap-1 md:gap-2 w-full">
+        <div class="flex flex-col gap-1 md:gap-2 md:flex-row w-full">
           <u-form-field class="grow" label="Nombre(s)" name="firstName">
             <u-input
               v-model="state.firstName"
@@ -164,7 +164,10 @@ watch(isEditingData, value => {
         </u-form-field>
 
         <div class="flex gap-4 mt-2">
-          <u-button v-if="!isEditingData" @click="isEditingData = true">
+          <u-button v-if="isEditingData" type="submit" :loading="pending || isLoading">
+            Guardar
+          </u-button>
+          <u-button v-else @click="isEditingData = true">
             Actualizar información
           </u-button>
           <u-button
@@ -174,9 +177,6 @@ watch(isEditingData, value => {
             @click="isEditingData = false"
           >
             Cancelar
-          </u-button>
-          <u-button v-if="isEditingData" type="submit" :loading="pending || isLoading">
-            Guardar
           </u-button>
         </div>
       </u-form>
