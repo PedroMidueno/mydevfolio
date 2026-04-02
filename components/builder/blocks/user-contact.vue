@@ -77,13 +77,13 @@ watch(isEditingData, () => {
 <template>
   <section id="contacto" class="custom-container flex flex-col gap-2">
     <ui-file-picker ref="filePickerRef" :accept="['application/pdf']" @update:file="handleFilePickerChange" />
-    <h2 class="text-xl font-semibold mb-2">
+    <h2 class="text-lg md:text-xl font-semibold mb-2">
       Información y redes de contacto
     </h2>
 
     <div class="flex flex-col gap-4 w-full">
-      <div class="flex gap-2 justify-between">
-        <div class="w-1/3 flex flex-col justify-between gap-1">
+      <div class="flex flex-col md:flex-row gap-2 justify-between">
+        <div class="w-full md:w-1/3 flex flex-col justify-between gap-1">
           <span class="block text-sm">Email registrado:</span>
           <div class="flex items-center gap-2">
             <u-input
@@ -101,7 +101,8 @@ watch(isEditingData, () => {
             <div v-else class="w-4 h-4"></div>
           </div>
         </div>
-        <div class="w-2/3 flex flex-col justify-between gap-1">
+
+        <div class="w-full md:w-2/3 flex flex-col justify-between gap-1">
           <span class="text-sm">Curriculum:</span>
           <div class="flex items-center gap-2">
             <u-input class="grow" disabled :model-value="userContact?.resumeFile?.originalName ?? 'Aún no has subido ningún currículum'" />
@@ -129,14 +130,15 @@ watch(isEditingData, () => {
           </div>
         </div>
       </div>
+
       <u-form
         class="flex flex-col gap-4 items-end"
         :state="state"
         :schema="schema"
         @submit="onSubmit"
       >
-        <div class="w-full flex gap-2 justify-between">
-          <u-form-field label="GitHub" name="githubUser" class="w-1/3">
+        <div class="w-full flex flex-col md:flex-row gap-2 justify-between">
+          <u-form-field label="GitHub" name="githubUser" class="w-full md:w-1/3 min-h-0">
             <u-input
               v-model="state.githubUser"
               :disabled="!isEditingData"
@@ -155,7 +157,7 @@ watch(isEditingData, () => {
               </template>
             </u-input>
           </u-form-field>
-          <u-form-field label="LinkedIn" name="linkedinUser" class="w-1/3">
+          <u-form-field label="LinkedIn" name="linkedinUser" class="w-full md:w-1/3 min-h-0">
             <u-input
               v-model="state.linkedinUser"
               :disabled="!isEditingData"
@@ -174,7 +176,7 @@ watch(isEditingData, () => {
               </template>
             </u-input>
           </u-form-field>
-          <u-form-field label="X" name="twitterUser" class="w-1/3">
+          <u-form-field label="X" name="twitterUser" class="w-full md:w-1/3 min-h-0">
             <u-input
               v-model="state.twitterUser"
               :disabled="!isEditingData"
